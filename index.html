@@ -82,8 +82,9 @@
 <body>
 
   <script>
-    var dayOfWeek = "Неделя 2";
-    var theme = "Бог избра пръв (Йоан 15:16)";
+    var today = '--';
+    var dayOfWeek = "преход";
+    var theme = "--";
     var teams = [
        { position: 1, color:"bg-team1", name:"Team 1", game1:"--", game2:"--", total:"0" },
        { position: 2, color:"bg-team2", name:"Team 2", game1:"--", game2:"--", total:"0" },
@@ -111,6 +112,7 @@
       { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
       { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
     ];
+    var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   </script>
 
   <div class="jumbotron text-center my-0 top-container text-black-50">
@@ -164,6 +166,8 @@
   </script>
 
   <script>
+    
+
     window.onscroll = function () { myFunction() };
 
     var header = document.getElementById("myHeader");
@@ -220,8 +224,13 @@
             $("#" + element.id).removeClass("bg-info");
             $("#" + element.id).removeClass("bg-secondary");
             $("#" + element.id + " > div > div > div:nth-child(3)").text(zeroPad(hours, 2) + ":" + zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2));
-          //  $('body').scrollTo("#" + element.id);
+            $("#" + element.id).get(0).scrollIntoView();
           }
+        }
+
+        var dayofweek = dayNames[ now.getDay() ];
+        if (dayofweek !== today) {
+          window.location.replace(dayofweek + ".html");
         }
       });
     }, 1000);
