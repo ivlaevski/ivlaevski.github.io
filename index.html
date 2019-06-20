@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Ти избираш - Детски летен лагер Блага Вест 2019</title>
   <meta charset="utf-8">
@@ -86,10 +87,10 @@
     var dayOfWeek = "преход";
     var theme = "--";
     var teams = [
-       { position: 1, color:"bg-team1", name:"Team 1", game1:"--", game2:"--", total:"0" },
-       { position: 2, color:"bg-team2", name:"Team 2", game1:"--", game2:"--", total:"0" },
-       { position: 3, color:"bg-team3", name:"Team 3", game1:"--", game2:"--", total:"0" },
-       { position: 4, color:"bg-team4", name:"Team 4", game1:"--", game2:"--", total:"0" }
+      { position: 1, color: "bg-team1", name: "Team 1", game1: "--", game2: "--", total: "0" },
+      { position: 2, color: "bg-team2", name: "Team 2", game1: "--", game2: "--", total: "0" },
+      { position: 3, color: "bg-team3", name: "Team 3", game1: "--", game2: "--", total: "0" },
+      { position: 4, color: "bg-team4", name: "Team 4", game1: "--", game2: "--", total: "0" }
     ];
     var timers = [
       { id: "pos1", hour: 7, min: 30, label: "Ставане" },
@@ -112,7 +113,7 @@
       { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
       { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
     ];
-    var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   </script>
 
   <div class="jumbotron text-center my-0 top-container text-black-50">
@@ -130,9 +131,18 @@
       </div>
     </div>
     <div class="row team-items">
-      
+
+    </div>
+    <div class="row p-3 my-3 text-right">
+      <div class="btn btn-info" id="clickme">Hide</div>
     </div>
   </div>
+  <script>
+    $("#clickme").click(function () {
+      $("#myHeader").hide("slow", function () {
+      });
+    });
+  </script>
 
   <div class="container">
     <div class="list-items">
@@ -166,7 +176,7 @@
   </script>
 
   <script>
-    
+
 
     window.onscroll = function () { myFunction() };
 
@@ -189,9 +199,9 @@
       return Array(+(zero > 0 && zero)).join("0") + num;
     }
 
-    var teamTpl = $('script[data-template="teamitem"]').text().split(/\$\{(.+?)\}/g);   
+    var teamTpl = $('script[data-template="teamitem"]').text().split(/\$\{(.+?)\}/g);
     var itemTpl = $('script[data-template="listitem"]').text().split(/\$\{(.+?)\}/g);
-    
+
     $("#dayOfWeekLabel").text(dayOfWeek);
     $("#themeLabel").text(theme);
 
@@ -228,7 +238,7 @@
           }
         }
 
-        var dayofweek = dayNames[ now.getDay() ];
+        var dayofweek = dayNames[now.getDay()];
         if (dayofweek !== today) {
           window.location.replace(dayofweek + ".html");
         }
