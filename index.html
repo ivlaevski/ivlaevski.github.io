@@ -9,7 +9,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+    integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
   <style>
     .bg-purple {
       background-color: #6f42c1;
@@ -66,7 +67,6 @@
     .sticky+.content {
       padding-top: 148px;
     }
-
   </style>
 </head>
 
@@ -81,184 +81,177 @@
     ];
     var week = {
       Saturday: {
-          dayOfWeek: "Събота",
-          theme: "Пристигане и разпределяне на отборите",
-          timers: [
-            { id: "pos8", hour: 14, min: "00", label: "Обяд" },
-            { id: "pos9", hour: 14, min: 30, label: "Настаняване" },
-            { id: "pos10", hour: 16, min: "00", label: "Плаж" },
-            { id: "pos12", hour: 17, min: "00", label: "Прибиране от плажа" },
-            { id: "pos13", hour: 17, min: 30, label: "Формиране на отбори" },
-            { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
-            { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
-            { id: "pos16", hour: 19, min: 45, label: "Служба" },
-            { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
-            { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
-            { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
-          ]
-        },
-        Sunday: {
-          dayOfWeek: "Неделя",
-          theme: "Бог избра пръв (Йоан 15:16)",
-          timers: [
-            { id: "pos1", hour: 7, min: 30, label: "Ставане" },
-            { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
-            { id: "pos3", hour: 8, min: "00", label: "Закуска" },
-            { id: "pos4", hour: 8, min: 30, label: "Молитва" },
-            { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
-            { id: "pos6", hour: 9, min: "00", label: "Плаж" },
-            { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
-            { id: "pos8", hour: 13, min: "00", label: "Обяд" },
-            { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
-            { id: "pos10", hour: 15, min: 30, label: "Ставане" },
-            { id: "pos11", hour: 16, min: "00", label: "Урок" },
-            { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
-            { id: "pos13", hour: 17, min: 30, label: "Игри" },
-            { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
-            { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
-            { id: "pos16", hour: 19, min: 45, label: "Служба" },
-            { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
-            { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
-            { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
-          ]
-        },
-        Monday: {
-          dayOfWeek: "Понеделник",
-          theme: "Избор да служим на Бога - Мария и Йосиф",
-          timers: [
-            { id: "pos1", hour: 7, min: 30, label: "Ставане" },
-            { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
-            { id: "pos3", hour: 8, min: "00", label: "Закуска" },
-            { id: "pos4", hour: 8, min: 30, label: "Молитва" },
-            { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
-            { id: "pos6", hour: 9, min: "00", label: "Плаж" },
-            { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
-            { id: "pos8", hour: 13, min: "00", label: "Обяд" },
-            { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
-            { id: "pos10", hour: 15, min: 30, label: "Ставане" },
-            { id: "pos11", hour: 16, min: "00", label: "Урок" },
-            { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
-            { id: "pos13", hour: 17, min: 30, label: "Игри" },
-            { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
-            { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
-            { id: "pos16", hour: 19, min: 45, label: "Служба" },
-            { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
-            { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
-            { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
-          ]
-        },
-        Tuesday: {
-          dayOfWeek: "Вторник",
-          theme: "Избор между Бога и богаството - богатия младеж",
-          timers: [
-            { id: "pos1", hour: 7, min: 30, label: "Ставане" },
-            { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
-            { id: "pos3", hour: 8, min: "00", label: "Закуска" },
-            { id: "pos4", hour: 8, min: 30, label: "Молитва" },
-            { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
-            { id: "pos6", hour: 9, min: "00", label: "Плаж" },
-            { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
-            { id: "pos8", hour: 13, min: "00", label: "Обяд" },
-            { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
-            { id: "pos10", hour: 15, min: 30, label: "Ставане" },
-            { id: "pos11", hour: 16, min: "00", label: "Урок" },
-            { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
-            { id: "pos13", hour: 17, min: 30, label: "Игри" },
-            { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
-            { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
-            { id: "pos16", hour: 19, min: 45, label: "Служба" },
-            { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
-            { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
-            { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
-          ]
-        },
-        Wednesday: {
-          dayOfWeek: "Сряда",
-          theme: "Избора на приятели",
-          timers: [
-            { id: "pos1", hour: 7, min: 30, label: "Ставане" },
-            { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
-            { id: "pos3", hour: 8, min: "00", label: "Закуска" },
-            { id: "pos4", hour: 8, min: 30, label: "Молитва" },
-            { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
-            { id: "pos6", hour: 9, min: "00", label: "Плаж" },
-            { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
-            { id: "pos8", hour: 13, min: "00", label: "Обяд" },
-            { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
-            { id: "pos10", hour: 15, min: 30, label: "Ставане" },
-            { id: "pos11", hour: 16, min: "00", label: "Урок" },
-            { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
-            { id: "pos13", hour: 17, min: 30, label: "Игри" },
-            { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
-            { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
-            { id: "pos16", hour: 19, min: 45, label: "Служба" },
-            { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
-            { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
-            { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
-          ]
-        },
-        Thursday: {
-          dayOfWeek: "Четвътък",
-          theme: "Избор да слушаме Бога, а не хората - Данаил",
-          timers: [
-            { id: "pos1", hour: 7, min: 30, label: "Ставане" },
-            { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
-            { id: "pos3", hour: 8, min: "00", label: "Закуска" },
-            { id: "pos4", hour: 8, min: 30, label: "Молитва" },
-            { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
-            { id: "pos6", hour: 9, min: "00", label: "Плаж" },
-            { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
-            { id: "pos8", hour: 13, min: "00", label: "Обяд" },
-            { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
-            { id: "pos10", hour: 15, min: 30, label: "Ставане" },
-            { id: "pos11", hour: 16, min: "00", label: "Урок" },
-            { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
-            { id: "pos13", hour: 17, min: 30, label: "Игри" },
-            { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
-            { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
-            { id: "pos16", hour: 19, min: 45, label: "Служба" },
-            { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
-            { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
-            { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
-          ]
-        },
-        Friday: {
-          dayOfWeek: "Петък",
-          theme: "Избор между живота и смъртта - Адам и Ева",
-          timers: [
-            { id: "pos1", hour: 7, min: 30, label: "Ставане" },
-            { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
-            { id: "pos3", hour: 8, min: "00", label: "Закуска" },
-            { id: "pos4", hour: 8, min: 30, label: "Молитва" },
-            { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
-            { id: "pos6", hour: 9, min: "00", label: "Плаж" },
-            { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
-            { id: "pos8", hour: 13, min: "00", label: "Обяд" },
-            { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
-            { id: "pos10", hour: 15, min: 30, label: "Ставане" },
-            { id: "pos11", hour: 16, min: "00", label: "Урок" },
-            { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
-            { id: "pos13", hour: 17, min: 30, label: "Игри" },
-            { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
-            { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
-            { id: "pos16", hour: 19, min: 45, label: "Служба" },
-            { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
-            { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
-            { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
-          ]
-        }
+        dayOfWeek: "Събота",
+        theme: "Пристигане и разпределяне на отборите",
+        timers: [
+          { id: "pos8", hour: 14, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: 30, label: "Настаняване" },
+          { id: "pos10", hour: 16, min: "00", label: "Плаж" },
+          { id: "pos12", hour: 17, min: "00", label: "Прибиране от плажа" },
+          { id: "pos13", hour: 17, min: 30, label: "Формиране на отбори" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
+          { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
+          { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
+        ]
+      },
+      Sunday: {
+        dayOfWeek: "Неделя",
+        theme: "Бог избра пръв (Йоан 15:16)",
+        timers: [
+          { id: "pos1", hour: 7, min: 30, label: "Ставане" },
+          { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
+          { id: "pos3", hour: 8, min: "00", label: "Закуска" },
+          { id: "pos4", hour: 8, min: 30, label: "Молитва" },
+          { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
+          { id: "pos6", hour: 9, min: "00", label: "Плаж" },
+          { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
+          { id: "pos8", hour: 13, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
+          { id: "pos10", hour: 15, min: 30, label: "Ставане" },
+          { id: "pos11", hour: 16, min: "00", label: "Урок" },
+          { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
+          { id: "pos13", hour: 17, min: 30, label: "Игри" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
+          { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
+          { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
+        ]
+      },
+      Monday: {
+        dayOfWeek: "Понеделник",
+        theme: "Избор да служим на Бога - Мария и Йосиф",
+        timers: [
+          { id: "pos1", hour: 7, min: 30, label: "Ставане" },
+          { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
+          { id: "pos3", hour: 8, min: "00", label: "Закуска" },
+          { id: "pos4", hour: 8, min: 30, label: "Молитва" },
+          { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
+          { id: "pos6", hour: 9, min: "00", label: "Плаж" },
+          { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
+          { id: "pos8", hour: 13, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
+          { id: "pos10", hour: 15, min: 30, label: "Ставане" },
+          { id: "pos11", hour: 16, min: "00", label: "Урок" },
+          { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
+          { id: "pos13", hour: 17, min: 30, label: "Игри" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
+          { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
+          { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
+        ]
+      },
+      Tuesday: {
+        dayOfWeek: "Вторник",
+        theme: "Избор между Бога и богаството - богатия младеж",
+        timers: [
+          { id: "pos1", hour: 7, min: 30, label: "Ставане" },
+          { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
+          { id: "pos3", hour: 8, min: "00", label: "Закуска" },
+          { id: "pos4", hour: 8, min: 30, label: "Молитва" },
+          { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
+          { id: "pos6", hour: 9, min: "00", label: "Плаж" },
+          { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
+          { id: "pos8", hour: 13, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
+          { id: "pos10", hour: 15, min: 30, label: "Ставане" },
+          { id: "pos11", hour: 16, min: "00", label: "Урок" },
+          { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
+          { id: "pos13", hour: 17, min: 30, label: "Игри" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
+          { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
+          { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
+        ]
+      },
+      Wednesday: {
+        dayOfWeek: "Сряда",
+        theme: "Избора на приятели",
+        timers: [
+          { id: "pos1", hour: 7, min: 30, label: "Ставане" },
+          { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
+          { id: "pos3", hour: 8, min: "00", label: "Закуска" },
+          { id: "pos4", hour: 8, min: 30, label: "Молитва" },
+          { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
+          { id: "pos6", hour: 9, min: "00", label: "Плаж" },
+          { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
+          { id: "pos8", hour: 13, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
+          { id: "pos10", hour: 15, min: 30, label: "Ставане" },
+          { id: "pos11", hour: 16, min: "00", label: "Урок" },
+          { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
+          { id: "pos13", hour: 17, min: 30, label: "Игри" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
+          { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
+          { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
+        ]
+      },
+      Thursday: {
+        dayOfWeek: "Четвътък",
+        theme: "Избор да слушаме Бога, а не хората - Данаил",
+        timers: [
+          { id: "pos1", hour: 7, min: 30, label: "Ставане" },
+          { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
+          { id: "pos3", hour: 8, min: "00", label: "Закуска" },
+          { id: "pos4", hour: 8, min: 30, label: "Молитва" },
+          { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
+          { id: "pos6", hour: 9, min: "00", label: "Плаж" },
+          { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
+          { id: "pos8", hour: 13, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
+          { id: "pos10", hour: 15, min: 30, label: "Ставане" },
+          { id: "pos11", hour: 16, min: "00", label: "Урок" },
+          { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
+          { id: "pos13", hour: 17, min: 30, label: "Игри" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
+          { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
+          { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
+        ]
+      },
+      Friday: {
+        dayOfWeek: "Петък",
+        theme: "Избор между живота и смъртта - Адам и Ева",
+        timers: [
+          { id: "pos1", hour: 7, min: 30, label: "Ставане" },
+          { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
+          { id: "pos3", hour: 8, min: "00", label: "Закуска" },
+          { id: "pos4", hour: 8, min: 30, label: "Молитва" },
+          { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
+          { id: "pos6", hour: 9, min: "00", label: "Плаж" },
+          { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
+          { id: "pos8", hour: 13, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
+          { id: "pos10", hour: 15, min: 30, label: "Ставане" },
+          { id: "pos11", hour: 16, min: "00", label: "Урок" },
+          { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
+          { id: "pos13", hour: 17, min: 30, label: "Игри" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
+          { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
+          { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
+        ]
+      }
     };
     var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   </script>
 
-  <div class="jumbotron text-center my-0 top-container text-black-50">
-    <div class="lh-100">
-      <h1 class="mb-0 lh-100">Ти избираш</h1>
-      <p>Детски летен лагер Блага Вест 2019</p>
-    </div>
-  </div>
-
-  <div class="header" id="myHeader" style="z-index: 100">
+  <div class="header sticky" id="myHeader" style="z-index: 100">
     <div class="jumbotron text-center p-3 my-3 text-white-50 bg-green rounded shadow-sm">
       <div class="lh-100" id="clickme">
         <h2 class="mb-0 text-white lh-100" id="dayOfWeekLabel">--</h2>
@@ -270,7 +263,14 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="jumbotron text-center my-0 top-container text-black-50">
+    <div class="lh-100">
+      <h1 class="mb-0 lh-100" id="TitleItem">Ти избираш</h1>
+      <p>Детски летен лагер Блага Вест 2019</p>
+    </div>
+  </div>
+
+  <div class="container content">
     <div class="list-items">
 
     </div>
@@ -280,9 +280,9 @@
       <div class="jumbotron d-flex align-items-center p-3 my-3 text-white-50 bg-info rounded shadow-sm" id="${id}">
         <div class="container">
           <div class="row text-white">
-            <div class="col-1 text-center">${hour}:${min}</div>
+            <div class="col-1 col-sm-2 text-center">${hour}:${min}</div>
             <div class="col">${label}</div>
-            <div class="col-2 text-right timerset">--</div>
+            <div class="col-2 col-sm-4 text-right timerset">--</div>
           </div>
         </div>
       </div>
@@ -304,27 +304,6 @@
   <script>
     var now = new Date();
     var dayofweek = dayNames[now.getDay()];
-
-    window.onscroll = function () { myFunction() };
-    var iScroll = false;
-    var autoScroll = false;
-    var header = document.getElementById("myHeader");
-    var sticky = header.offsetTop;
-
-    function myFunction() {
-      if (window.pageYOffset > sticky) {
-          header.classList.add("sticky");
-      } else {
-          header.classList.remove("sticky");
-      }
-      if (!autoScroll) {
-        iScroll = true;
-        var done = setTimeout(function () {
-          iScroll = false;
-        }, 3000);
-      }
-      autoScroll = false;
-    }
 
     function render(props) {
       return function (tok, i) { return (i % 2) ? props[tok] : tok; };
@@ -348,8 +327,12 @@
       return teamTpl.map(render(item)).join('');
     }));
 
-    var x = setInterval(function () { 
-      now = new Date();     
+    var x = setInterval(function () {
+      now = new Date();
+
+      var yourHeight = $("#myHeader").outerHeight();
+      $("#TitleItem").css("margin-top", yourHeight);
+
       var first = true;
       var last = "pos1";
       week[dayofweek].timers.forEach(element => {
@@ -371,15 +354,14 @@
             $("#" + last).removeClass("bg-info");
             $("#" + last).removeClass("bg-secondary");
             $("#" + last + " > div > div > div:nth-child(3)").text(zeroPad(hours, 2) + ":" + zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2));
-            if (!iScroll) {
-              autoScroll = true;
-              $("#" + last).get(0).scrollIntoView();
-            }
+
+            var y = $("#" + last).offset().top;
+            window.scroll(0, y - yourHeight - 12);
           }
         }
         last = element.id;
       });
-    }, 1000);
+    }, 1000 * 5);
 
     $("#clickme").click(function () {
       $("#myHeader").hide("slow", function () {
