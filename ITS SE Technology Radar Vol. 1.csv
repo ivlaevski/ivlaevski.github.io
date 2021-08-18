@@ -1,0 +1,89 @@
+name,ring,quadrant,isNew,description
+.Net Core 3.*,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+.Net Entity Framework,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+Angular,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+C#,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+C++,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+CSOM,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+JavaScript,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+JSOM,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+Node.js,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+Python,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+React,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+Reference Arch Test Template,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+Reference Arch Web Template,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+SharePoint,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+SQL,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+SSOM,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+TypeScript,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+Vue,Adopt,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+.Net Core 5,Assess,languages-and-frameworks,true,<p><strong>TBD</strong></p>
+Blazor,Assess,languages-and-frameworks,true,<p><strong>TBD</strong></p>
+Next.js,Assess,languages-and-frameworks,true,<p><strong>TBD</strong></p>
+.Net Framework,Hold,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+Frameworkless Frontend,Hold,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+VB,Hold,languages-and-frameworks,false,<p><strong>TBD</strong></p>
+Azure Cloud Country hosting,Adopt,Platforms,false,<p><strong>TBD</strong></p>
+Azure Cloud One Platform (managed),Adopt,Platforms,false,<p><strong>TBD</strong></p>
+Azure Cloud One platform (sandbox),Adopt,Platforms,false,<p><strong>TBD</strong></p>
+DE Intranet,Adopt,Platforms,false,<p><strong>TBD</strong></p>
+DE Secure Hosting,Adopt,Platforms,false,<p><strong>TBD</strong></p>
+NEO,Adopt,Platforms,true,<p><strong>TBD</strong></p>
+SharePoint 2013,Adopt,Platforms,false,<p><strong>TBD</strong></p>
+SharePoint 2016,Adopt,Platforms,false,<p><strong>TBD</strong></p>
+SharePoint 2019,Adopt,Platforms,false,<p><strong>TBD</strong></p>
+Cisco (UCM),Assess,Platforms,true,<p><strong>TBD</strong></p>
+MS Dynamics 365,Assess,Platforms,true,<p><strong>TBD</strong></p>
+MS Teams,Assess,Platforms,true,<p><strong>TBD</strong></p>
+AWS,Trial,Platforms,false,<p><strong>TBD</strong></p>
+Azure Cloud - Cloud Next,Trial,Platforms,false,<p><strong>TBD</strong></p>
+Azure Cloud (MSDN Labs),Trial,Platforms,false,<p><strong>TBD</strong></p>
+KPMG Code,Trial,Platforms,true,<p><strong>TBD</strong></p>
+SOFY,Trial,Platforms,true,<p><strong>TBD</strong></p>
+API backwards compatibility,Adopt,Techniques,true,<p><strong>API Backwards Compatibility</strong> is key to successful cross-team feature development in agile and scalable projects</p>
+Automated Testing,Adopt,Techniques,false,<p><strong>TBD</strong></p>
+Centralized identity,Adopt,Techniques,false,<p><strong>TBD</strong></p>
+Cloud Sandbox,Adopt,Techniques,true,<p><strong>TBD</strong></p>
+Custom Scrum Methodology,Adopt,Techniques,true,<p><strong>TBD</strong></p>
+DevOps,Adopt,Techniques,false,<p>Short and agile <strong>System Development Life cycle</strong> providing <strong>software quality</strong> and <strong>continuos deployment</strong> in <strong>Secure Software Supply Chain</strong>.
+Event Sourcing,Adopt,Techniques,true,"<p><strong><a href=""https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing"">Event Sourcing</a></strong> is architecture approach that ensures that all changes to application state are stored as a sequence of events. It's key to successful auditable and secure application. This design pattern alow easy external system integration.</p>"
+Managed Cloud Environments,Adopt,Techniques,true,<p><strong>TBD</strong></p>
+Manual Testing,Adopt,Techniques,false,<p><strong>TBD</strong></p>
+Microservice Solution,Adopt,Techniques,false,"<p>Based on client scope and high level architecture we successfully build <strong><a href=""https://docs.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices"">Microservice Solutions</a></strong> for custom container based environments or for Service Fabric</p>"
+Mobile PWA Application,Adopt,Techniques,false,"<p>Building responsive web applications as <strong><a href=""https://en.wikipedia.org/wiki/Progressive_web_application"">Mobile Progressive Web Application</a></strong> enable us to deliver close-to-native experience in mobile application development</p>"
+Monolith Solutions,Adopt,Techniques,false,<p><strong>Monolith Applications</strong> are build for package delivery based on client scope and requirement. We can take advantage from <strong>Reference Architecture</strong> to ease the development.</p>
+MVC,Adopt,Techniques,false,"<p><strong><a href=""https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller"">Model-view-controller</a></strong>is a design pattern commonly used divide the related program logic.</p>"
+Peer review equals pull request,Adopt,Techniques,false,<p><strong>TBD</strong></p>
+Privacy-focused web analytics,Adopt,Techniques,true,<p><strong>TBD</strong></p>
+Quality Assurance Strategy,Adopt,Techniques,true,<p><strong>TBD</strong></p>
+Reference Architecture,Adopt,Techniques,false,"<p><strong><a href=""https://en.wikipedia.org/wiki/Reference_architecture"">Reference Architecture</a></strong> is a code base with templates and packages that help us building non-functional components of each solution (like: logging, audit, identity, database access according to the environment security requirements, etc.).</p>"
+REST API,Adopt,Techniques,false,"<p>The <strong>Representational state transfer (<a href=""https://en.wikipedia.org/wiki/Representational_state_transfer"">REST API</a>)</strong> is commonly used in architectures we make to communicate with external systems or internally through our services</p>"
+RfP (Scope Estimation),Adopt,Techniques,false,<p><strong>TBD</strong></p>
+Secure Web applications,Adopt,Techniques,false,"<p>Building stable, redundant and secure <strong>Web Applications</strong> in Cloud and on Premis with application design, implementation, vulnerability testing, and monitoring according to member firms standarts and guidelines.</p>"
+Software Delivery Guardrails,Adopt,Techniques,true,"<p>Empowering development teams to find, fix and prevent vulnerabilities related to source code, open source libraries, secret management and cloud configuration</p>"
+Strong Security Policy,Adopt,Techniques,false,<p>We meet the the security requiements set out by the <strong>Global Information Security Policies</strong> enforsing management directions and support for information security in accordance with business requirements and relevant laws and regulations.</p>
+Tailored Project Teams,Adopt,Techniques,false,<p>Together with Business Development we build <strong>Tailored Project Teams</strong> customized for the client requirements and scope of the project.</p>
+Delivery Lead,Assess,Techniques,true,"<p>Each project requires a strong Project Management and Governance, but in our agile cross-region-development-approach we need to have a <strong>Delivery Lead</strong> localized in our team and location to be responsible for the full delivery scope on our side.</p>"
+Low-code Platforms,Assess,Techniques,true,<p><strong>TBD</strong></p>
+Secure Software Supply Chain,Assess,Techniques,true,<p><strong>TBD</strong></p>
+Blockchain,Hold,Techniques,true,<p><strong>TBD</strong></p>
+Azure DevOps,Adopt,Tools,false,<p><strong>TBD</strong></p>
+Azure DevOps with CI\CD,Adopt,Tools,false,"<p><strong>Azure DevOps</strong> provides version control, reporting, requirements management, project management (for both agile software development and waterfall teams), automated builds, testing and release management capabilities. It covers the entire application lifecycle, and enables DevOps capabilities</p>"
+Fortify On Demand,Adopt,Tools,false,<p><strong>TBD</strong></p>
+PEGA,Adopt,Tools,true,<p><strong>TBD</strong></p>
+Protractor,Adopt,Tools,false,<p><strong>TBD</strong></p>
+RanoRex,Adopt,Tools,false,<p><strong>TBD</strong></p>
+Selenium C#,Adopt,Tools,false,<p><strong>TBD</strong></p>
+SonarQube,Adopt,Tools,false,<p><strong>TBD</strong></p>
+SP caf,Adopt,Tools,false,<p><strong>TBD</strong></p>
+StyleCop,Adopt,Tools,false,<p><strong>TBD</strong></p>
+Swagger,Adopt,Tools,false,<p><strong>TBD</strong></p>
+TSLint,Adopt,Tools,false,<p><strong>TBD</strong></p>
+Visual Studio 2019,Adopt,Tools,false,<p><strong>TBD</strong></p>
+Visual Studio Code,Adopt,Tools,false,<p><strong>TBD</strong></p>
+Whitesource,Adopt,Tools,false,<p><strong>TBD</strong></p>
+Codecept JS,Assess,Tools,true,<p><strong>TBD</strong></p>
+K6,Assess,Tools,true,<p><strong>TBD</strong></p>
+Appium,Trial,Tools,true,<p><strong>TBD</strong></p>
+Cypress,Trial,Tools,true,<p><strong>TBD</strong></p>
+Selenium JS,Trial,Tools,true,<p><strong>TBD</strong></p>
