@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Ти избираш - Детски летен лагер Блага Вест 2019</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+    integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+  <style>
+    .bg-purple {
+      background-color: #6f42c1;
+    }
+
+    .bg-green {
+      background-color: #459418;
+    }
+
+    .bg-team1 {
+      background-color: #db15a0;
+    }
+
+    .bg-team2 {
+      background-color: #ec0e51;
+    }
+
+    .bg-team3 {
+      background-color: #e98d14;
+      color: black;
+    }
+
+    .bg-team4 {
+      background-color: #e0d324;
+      color: black;
+    }
+
+
+    body {
+      margin: 0;
+      font-size: 35px;
+    }
+
+    .top-container {
+      background-color: #f1f1f1;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .header {
+      padding: 10px 16px;
+      background: #555;
+      color: #f1f1f1;
+    }
+
+    .content {
+      padding: 16px;
+    }
+
+    .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    .sticky+.content {
+      padding-top: 148px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    var teams = [
+      { position: 1, color: "bg-team1", name: "Розовите кравички", acolor:"P", game1: "3", game2: "9", total: "134" },
+      { position: 2, color: "bg-team2", name: "Морските звезди",   acolor:"R", game1: "9", game2: "3", total: "128" },
+      { position: 3, color: "bg-team3", name: "Немо",              acolor:"O", game1: "6", game2: "12", total: "125" },
+      { position: 4, color: "bg-team4", name: "Сините пламъчета",  acolor:"Y", game1: "12", game2: "6", total: "117" }
+    ];
+    var week = {
+      Saturday: {
+        dayOfWeek: "Събота",
+        theme: "Пристигане и разпределяне на отборите",
+        timers: [
+          { id: "pos8", hour: 14, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: 30, label: "Настаняване" },
+          { id: "pos10", hour: 16, min: "00", label: "Плаж" },
+          { id: "pos12", hour: 17, min: "00", label: "Прибиране от плажа" },
+          { id: "pos13", hour: 17, min: 30, label: "Формиране на отбори" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
+          { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
+          { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
+        ]
+      },
+      Sunday: {
+        dayOfWeek: "Неделя",
+        theme: "Бог избра пръв - защото под небето няма друго име, на човеци дадено, чрез което трябва да се спасим ( Деяния 4:12 )",
+        timers: [
+          { id: "pos1", hour: 7, min: 30, label: "Ставане" },
+          { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
+          { id: "pos3", hour: 8, min: "00", label: "Закуска" },
+          { id: "pos4", hour: 8, min: 30, label: "Молитва" },
+          { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
+          { id: "pos6", hour: 9, min: "00", label: "Плаж - верига с топка" },
+          { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
+          { id: "pos8", hour: 13, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
+          { id: "pos10", hour: 15, min: 45, label: "Ставане" },
+          { id: "pos11", hour: 16, min: "00", label: "Урок" },
+          { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
+          { id: "pos13", hour: 17, min: 30, label: "Игри - Corndhole" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри - спортни игри и сценка" },
+          { id: "pos18", hour: 22, min: "00", label: "Прибиране на малките" },
+          { id: "pos18", hour: 23, min: "00", label: "Прибиране на големите" },
+          { id: "pos19", hour: 23, min: 30, label: "Гасене на лампите" }
+        ]
+      },
+      Monday: {
+        dayOfWeek: "Понеделник",
+        theme: "Избор да служим на Бога - Но първом търсете царството на Бога и Неговата правда, и всичко това ще ви се придаде. (Матей 6:33)",
+        timers: [
+          { id: "pos1", hour: 7, min: 30, label: "Ставане" },
+          { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
+          { id: "pos3", hour: 8, min: "00", label: "Закуска" },
+          { id: "pos4", hour: 8, min: 30, label: "Молитва " },
+          { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
+          { id: "pos6", hour: 9, min: "00", label: "Плаж - макаронена топка" },
+          { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
+          { id: "pos8", hour: 13, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
+          { id: "pos10", hour: 15, min: 30, label: "Ставане" },
+          { id: "pos11", hour: 16, min: "00", label: "Урок" },
+          { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
+          { id: "pos13", hour: 17, min: 30, label: "Игри - 4 нива на мъка" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри -барбекю" },
+          { id: "pos18", hour: 22, min: "00", label: "Прибиране на малките" },
+          { id: "pos18", hour: 23, min: "00", label: "Прибиране на големите" },
+          { id: "pos19", hour: 23, min: 30, label: "Гасене на лампите" }
+        ]
+      },
+      Tuesday: {
+        dayOfWeek: "Вторник",
+        theme: "Избор между Бога и богаството - При това знаем, че на ония, които любят Бога и са призвани по Негова воля, всичко съдействува към добро (Римляни 8:28)",
+        timers: [
+          { id: "pos1", hour: 7, min: 30, label: "Ставане" },
+          { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
+          { id: "pos3", hour: 8, min: "00", label: "Закуска" },
+          { id: "pos4", hour: 8, min: 30, label: "Молитва" },
+          { id: "pos6", hour: 9, min: "00", label: "Урок" },
+          { id: "pos7", hour: 10, min: "00", label: "Сценка" },
+          { id: "pos7", hour: 11, min: "00", label: "Игра" },
+          { id: "pos7", hour: 12, min: "00", label: "Свободно време" },
+          { id: "pos8", hour: 13, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: "00", label: "Парк" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри - кукли" },
+          { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
+          { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
+        ]
+      },
+      Wednesday: {
+        dayOfWeek: "Сряда",
+        theme: "Избора на приятели - Слушай, синко, и бъди мъдър и насочвай сърцето си по правия път. (Притчи23:19)",
+        timers: [
+          { id: "pos1", hour: 7, min: 30, label: "Ставане" },
+          { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
+          { id: "pos3", hour: 8, min: "00", label: "Закуска" },
+          { id: "pos4", hour: 8, min: 30, label: "Молитва" },
+          { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
+          { id: "pos6", hour: 9, min: "00", label: "Плаж - балонни" },
+          { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
+          { id: "pos8", hour: 13, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
+          { id: "pos10", hour: 15, min: 30, label: "Ставане" },
+          { id: "pos11", hour: 16, min: "00", label: "Урок" },
+          { id: "pos12", hour: 17, min: "00", label: "Пиеса" },
+          { id: "pos13", hour: 17, min: 30, label: "Игри - минно поле" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри - вечер на момчета и момичета" },
+          { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
+          { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
+        ]
+      },
+      Thursday: {
+        dayOfWeek: "Четвътък",
+        theme: "Избор да слушаме Бога, а не хората - И тъй, братя мои възлюбени, бъдете твърди, непоколебими и напредвайте винаги в делото Господне, като знаете, че трудът ви не е напразен пред Господа. (1 Кор 15:58)",
+        timers: [
+          { id: "pos1", hour: 7, min: 30, label: "Ставане" },
+          { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
+          { id: "pos3", hour: 8, min: "00", label: "Закуска" },
+          { id: "pos4", hour: 8, min: 30, label: "Молитва" },
+          { id: "pos11", hour: 9, min: "00", label: "Урок" },
+          { id: "pos12", hour: 10, min: "00", label: "Пиеса" },
+          { id: "pos13", hour: 11, min: "00", label: "Игри - кралят" },
+          { id: "pos9", hour: 12, min: "00", label: "свободно време" },        
+          
+          { id: "pos8", hour: 13, min: "00", label: "Обяд" },
+          { id: "pos5", hour: 14, min: 45, label: "Подготовка за плаж" },
+          { id: "pos6", hour: 15, min: "00", label: "Плаж - пренасяне" },
+          { id: "pos7", hour: 18, min: "00", label: "Прибиране" },
+          
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "разходка в града" },
+          { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
+          { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
+        ]
+      },
+      Friday: {
+        dayOfWeek: "Петък",
+        theme: "Избор между живота и смъртта - Във всичките си пътища познавай Него, и Той ще оправи твоите пътеки. (Притчи 3:6)",
+        timers: [
+          { id: "pos1", hour: 7, min: 30, label: "Ставане" },
+          { id: "pos2", hour: 7, min: 45, label: "Гимнастика" },
+          { id: "pos3", hour: 8, min: "00", label: "Закуска" },
+          { id: "pos4", hour: 8, min: 30, label: "Молитва" },
+          { id: "pos5", hour: 8, min: 45, label: "Подготовка за плаж" },
+          { id: "pos6", hour: 9, min: "00", label: "Плаж - пясъчни фигури" },
+          { id: "pos7", hour: 12, min: "00", label: "Прибиране" },
+          { id: "pos8", hour: 13, min: "00", label: "Обяд" },
+          { id: "pos9", hour: 14, min: "00", label: "Обедна почивка" },
+          { id: "pos10", hour: 15, min: 30, label: "Ставане" },
+          { id: "pos11", hour: 16, min: "00", label: "Урок" },
+          { id: "pos12", hour: 17, min: "00", label: "Подготовка за вечертана талантите" },
+          { id: "pos14", hour: 18, min: 45, label: "Подготовка за вечерята" },
+          { id: "pos15", hour: 19, min: "00", label: "Вечеря" },
+          { id: "pos16", hour: 19, min: 45, label: "Служба" },
+          { id: "pos17", hour: 20, min: 30, label: "Вечерни игри" },
+          { id: "pos18", hour: 22, min: 15, label: "Прибиране на малките" },
+          { id: "pos19", hour: 23, min: "00", label: "Гасене на лампите" }
+        ]
+      }
+    };
+    var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  </script>
+
+  <div class="header sticky" id="myHeader" style="z-index: 100">
+    <div class="jumbotron text-center p-3 my-3 text-white-50 bg-green rounded shadow-sm">
+      <div class="lh-100" id="clickme">
+        <h2 class="mb-0 text-white lh-100" id="dayOfWeekLabel">--</h2>
+        <h3 class="mb-0 text-white lh-100" id="themeLabel">--</h3>
+      </div>
+    </div>
+    <div class="row team-items">
+
+    </div>
+  </div>
+
+  <div class="jumbotron text-center my-0 top-container text-black-50">
+    <div class="lh-100">
+      <h1 class="mb-0 lh-100" id="TitleItem">Ти избираш</h1>
+      <p>Детски летен лагер Блага Вест 2019</p>
+    </div>
+  </div>
+
+  <div class="container content">
+    <div class="list-items">
+
+    </div>
+  </div>
+
+  <script type="text/template" data-template="listitem">
+      <div class="jumbotron d-flex align-items-center p-3 my-3 text-white-50 bg-info rounded shadow-sm" id="${id}">
+        <div class="container">
+          <div class="row text-white">
+            <div class="col-1 col-sm-2 text-center">${hour}:${min}</div>
+            <div class="col">${label}</div>
+            <div class="col-2 col-sm-4 text-right timerset">--</div>
+          </div>
+        </div>
+      </div>
+  </script>
+
+  <script type="text/template" data-template="teamitem">
+    <div class="text-center shadow-sm col-sm-3" style="margin-top: ${position}0px">
+      <div class="align-items-center p-0 rounded ${color}">
+        <h4>${name}</h4>
+      </div>
+      <div class="row">
+        <div class="col"><i class='fas fa-umbrella-beach'></i> ${game1} т.</div>
+        <div class="col"><i class='fas fa-campground'></i> ${game2} т.</div>
+      </div>
+      <p class="center">Общо: ${total} точки</p>
+    </div>
+  </script>
+
+  <script>
+    var now = new Date();
+    var dayofweek = dayNames[now.getDay()];
+
+    function render(props) {
+      return function (tok, i) { return (i % 2) ? props[tok] : tok; };
+    }
+
+    function zeroPad(num, places) {
+      var zero = places - num.toString().length + 1;
+      return Array(+(zero > 0 && zero)).join("0") + num;
+    }
+
+    var teamTpl = $('script[data-template="teamitem"]').text().split(/\$\{(.+?)\}/g);
+    var itemTpl = $('script[data-template="listitem"]').text().split(/\$\{(.+?)\}/g);
+
+    $("#dayOfWeekLabel").text(week[dayofweek].dayOfWeek);
+    $("#themeLabel").text(week[dayofweek].theme);
+
+    $('.list-items').append(week[dayofweek].timers.map(function (item) {
+      return itemTpl.map(render(item)).join('');
+    }));
+    $('.team-items').append(teams.map(function (item) {
+      return teamTpl.map(render(item)).join('');
+    }));
+
+    var x = setInterval(function () {
+      now = new Date();
+
+      var yourHeight = $("#myHeader").outerHeight();
+      $("#TitleItem").css("margin-top", yourHeight);
+
+      var first = true;
+      var last = "pos1";
+      week[dayofweek].timers.forEach(element => {
+        var countDownDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), element.hour, element.min, 0, 0);
+        var distance = countDownDate.getTime() - now.getTime();
+        if (distance < 0) {
+          $("#" + element.id).addClass("bg-secondary");
+          $("#" + element.id).removeClass("bg-success");
+          $("#" + element.id).removeClass("bg-info");
+          $("#" + element.id + " > div > div > div:nth-child(3)").text("--");
+        } else {
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          if (first) {
+            first = false;
+            $("#" + last).addClass("bg-success");
+            $("#" + last).removeClass("bg-info");
+            $("#" + last).removeClass("bg-secondary");
+            $("#" + last + " > div > div > div:nth-child(3)").text(zeroPad(hours, 2) + ":" + zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2));
+
+            var y = $("#" + last).offset().top;
+            window.scroll(0, y - yourHeight - 12);
+          }
+        }
+        last = element.id;
+      });
+    }, 1000 * 5);
+
+    $("#clickme").click(function () {
+      $("#myHeader").hide("slow", function () {
+      });
+    });
+  </script>
+</body>
+
+</html>
