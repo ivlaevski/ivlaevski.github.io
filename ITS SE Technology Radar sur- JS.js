@@ -31,6 +31,6 @@ new TechRadar.Blip("JavaScript", adopt, false, "<p><a href=\\\"https://www.javas
 new TechRadar.Blip("Node.js", adopt, false, "<p><a href=\\\"https://nodejs.org/en/\\\">Node.js </a>is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser.</p>"),
 new TechRadar.Blip("Vue.js", trial, true, "<p><a href=\\\"https://vuejs.org/\\\">Vue.js</a>&nbsp;is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications.</p>"),
 new TechRadar.Blip("Java", hold, true, "<p>Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.</p>"),
-new TechRadar.Blip("Next.js", asess, false, "<p>Next.js is an open-source development framework built on top of Node.js enabling React based web applications functionalities such as server-side rendering and generating static websites.</p>"),
+new TechRadar.Blip("Next.js", assess, false, "<p>Next.js is an open-source development framework built on top of Node.js enabling React based web applications functionalities such as server-side rendering and generating static websites.</p>"),
 ]);
 

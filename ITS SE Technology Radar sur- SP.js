@@ -26,6 +26,6 @@ languageFramework.add([
 new TechRadar.Blip("Angular", adopt, false, "<p><a href=\\\"https://angular.io/\\\">Angular </a>is a TypeScript-based free and open-source web application framework led by the Angular Team at Google and by a community of individuals and corporations.</p>"),
 new TechRadar.Blip("C#", adopt, false, "<p>C# is a general-purpose, multi-paradigm programming language.</p>"),
 new TechRadar.Blip("Java", hold, true, "<p>Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.</p>"),
-new TechRadar.Blip("Next.js", asess, false, "<p>Next.js is an open-source development framework built on top of Node.js enabling React based web applications functionalities such as server-side rendering and generating static websites.</p>"),
+new TechRadar.Blip("Next.js", assess, false, "<p>Next.js is an open-source development framework built on top of Node.js enabling React based web applications functionalities such as server-side rendering and generating static websites.</p>"),
 ]);
 

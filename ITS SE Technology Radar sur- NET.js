@@ -37,6 +37,6 @@ new TechRadar.Blip("C#", adopt, false, "<p>C# is a general-purpose, multi-paradi
 new TechRadar.Blip("JavaScript", adopt, false, "<p><a href=\\\"https://www.javascript.com/\\\">JavaScript</a>, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.</p>"),
 new TechRadar.Blip("Blazor", adopt, true, "<p><a href=\\\"https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor\\\">Blazor </a>is a free and open-source web framework that enables developers to create web apps using C# and HTML</p>"),
 new TechRadar.Blip("Java", hold, true, "<p>Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.</p>"),
-new TechRadar.Blip("Next.js", asess, false, "<p>Next.js is an open-source development framework built on top of Node.js enabling React based web applications functionalities such as server-side rendering and generating static websites.</p>"),
+new TechRadar.Blip("Next.js", assess, false, "<p>Next.js is an open-source development framework built on top of Node.js enabling React based web applications functionalities such as server-side rendering and generating static websites.</p>"),
 ]);
 

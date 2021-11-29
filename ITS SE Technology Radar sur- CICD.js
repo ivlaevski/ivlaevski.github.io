@@ -26,6 +26,6 @@ new TechRadar.Blip("Azure Cloud", trial, false, "<p>Microsoft Azure is a cloud c
 
 languageFramework.add([
 new TechRadar.Blip("Java", hold, true, "<p>Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.</p>"),
-new TechRadar.Blip("Next.js", asess, false, "<p>Next.js is an open-source development framework built on top of Node.js enabling React based web applications functionalities such as server-side rendering and generating static websites.</p>"),
+new TechRadar.Blip("Next.js", assess, false, "<p>Next.js is an open-source development framework built on top of Node.js enabling React based web applications functionalities such as server-side rendering and generating static websites.</p>"),
 ]);
 
