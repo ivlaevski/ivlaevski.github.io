@@ -7,7 +7,7 @@
         "const": [ "A" ],
         "targetField": [],
         "rule": "must",
-        "weight": 10
+        "weight": 100
     },
     {
         "sourceField": "offer",
@@ -15,7 +15,7 @@
         "const": [ true ],
         "targetField": [],
         "rule": "must",
-        "weight": 10
+        "weight": 100
     },
     {
         "sourceField": "age",
@@ -23,7 +23,7 @@
         "const": [],
         "targetField": [ "age" ],
         "rule": "offset from center",
-        "weight": 0.01
+        "weight": 30
     },
     {
         "sourceField": "gender",
@@ -31,7 +31,7 @@
         "const": [],
         "targetField": [ "gender" ],
         "rule": "float",
-        "weight": 1
+        "weight": 10
     },
     {
         "sourceField": "persuasion",
@@ -39,7 +39,7 @@
         "const": [],
         "targetField": [ "persuasion" ],
         "rule": "float",
-        "weight": 1
+        "weight": 10
     },
     {
         "sourceField": "interest",
@@ -47,7 +47,7 @@
         "const": [],
         "targetField": [ "interest" ],
         "rule": "multiply",
-        "weight": 0.1
+        "weight": 30
     },
     {
         "sourceField": "job",
@@ -55,7 +55,7 @@
         "const": [],
         "targetField": [ "job" ],
         "rule": "float",
-        "weight": 1
+        "weight": 10
     },
     {
         "sourceField": "family",
@@ -63,7 +63,7 @@
         "const": [],
         "targetField": [ "family" ],
         "rule": "float",
-        "weight": 1
+        "weight": 10
     },
     {
         "sourceField": "children",
@@ -71,7 +71,7 @@
         "const": [],
         "targetField": [ "children" ],
         "rule": "offset from bottom",
-        "weight": 0.1
+        "weight": 10
     },
     {
         "sourceField": "income",
@@ -79,7 +79,7 @@
         "const": [],
         "targetField": [ "income" ],
         "rule": "offset from center",
-        "weight": 0.00001
+        "weight": 30
     },
     {
         "sourceField": "savings",
@@ -87,7 +87,7 @@
         "const": [],
         "targetField": [ "savings" ],
         "rule": "offset from top",
-        "weight": 0.000001
+        "weight": 30
     }
 ]
 }

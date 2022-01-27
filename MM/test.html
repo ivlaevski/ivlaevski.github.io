@@ -17,6 +17,7 @@
             var questions = [];
             var offers = [];
             var configs = [];
+            var MAX = 100;
 
             function LoadFiles(FileName) {
                 var dfd = $.Deferred();
@@ -50,6 +51,11 @@
                     var question = questions[q];
                     for (var c = 0; c < configs.length; c++) {
                         var config = configs[c];
+                        var configMAX = 0;
+                        for (var r = 0; r < config.rules.length; r++) {
+                            configMAX += config.rules[r].rule === "must" ? 0 : config.rules[r].weight;
+                        }
+                        Log(config.id + " -- max: " + configMAX + "<br/>");
                         for (var o = 0; o < offers.length; o++) {
                             var offer = offers[o];
                             var result = Compare(config, question, offer);
@@ -80,12 +86,12 @@
                 Log(configuration.id + "-" + search.id + "-" + profile.id + "<br/>");
                 if (search.type !== profile.type) {
                     Log("- no type match<br/>");
-                    return -99999;
+                    return -MAX*MAX*MAX;
                 }
-                var weight = 10;
+                var weight = MAX;
                 for (var r = 0; r < configuration.rules.length; r++) {
                     var rule = configuration.rules[r];
-                    var res = 10;
+                    var res = MAX;
                     Log(" - " + rule.sourceField + " [" + rule.function + "][" + rule.rule + "][" + rule.weight +"] " + JSON.stringify(rule.targetField) + "<br/>");
                     switch (rule.function) {
                         case "const":
@@ -107,6 +113,9 @@
                 return weight;
             }
 
+            /*
+            Exists
+            */
             function RuleExists(rule, source, target) {                
                 var value = source[rule.sourceField];
                 var compareS = [];
@@ -116,6 +125,7 @@
                     compareS.push(value);
                 }
                 var maxFit = 0;
+                var maxTarget = 0;
                 for (var t = 0; t < rule.targetField.length; t++) {
                     var targetValue = target[rule.targetField[t]];
                     Log(" - - " + JSON.stringify(value) + " =?= " + JSON.stringify(targetValue) + "<br/>");
@@ -126,6 +136,7 @@
                         compareT.push(targetValue);
                     }
                     var thisFit = 0;
+                    if (maxTarget < compareT.length) maxTarget = compareT.length;
                     for (var x = 0; x < compareT.length; x++) {
                         if (compareT[x] === "*" && compareS.length > 0) {
                             thisFit += compareS.length;
@@ -143,12 +154,18 @@
                 }
                 switch (rule.rule) {
                     case "multiply":
-                        return - maxFit*rule.weight;                 
+                        if (maxFit > maxTarget) return 0;
+                        var tmp = maxTarget - maxFit; // what we miss
+                        return rule.weight * tmp / maxTarget;                 
                     default: //float
                         return maxFit === 0 ? rule.weight : 0;
                 }
             }
 
+            /*
+            Range
+            result % of max
+            */
             function RuleRange(rule, source, target) {
                 var value = source[rule.sourceField];                
                 if (typeof value == "number") {
@@ -160,17 +177,25 @@
                             var max = targetValue[1];
                             if (typeof min !== "number" || typeof max !== "number") {
                                 Log("- error: not number at range Q: " + rule.targetField[t] + "<br/>");
-                                return 10;
+                                return MAX;
                             }
                             switch (rule.rule) {
                                 case "offset from center":
-                                    return rule.weight * Math.abs(value - (((max - min) / 2) + min));
+                                    var halfRange = max-min/2;
+                                    var center = (halfRange + min);
+                                    if (halfRange === 0) return value === min ? 0 : rule.weight;
+                                    var dist = Math.abs(value - center);                                    
+                                    return dist > halfRange ? rule.weight : dist * rule.weight / halfRange;
                                 case "offset from bottom":
-                                    return rule.weight * Math.abs(value - min);
+                                    var dist = Math.abs(value - min); 
+                                    if (max-min === 0) return value === min ? 0 : rule.weight;
+                                    return value > max || value < min ? rule.weight : dist * rule.weight / (max-min);
                                 case "offset from top":
-                                    return rule.weight * Math.abs(value - max);
+                                    var dist = Math.abs(value - max);
+                                    if (max-min === 0) return value === max ? 0 : rule.weight;
+                                    return value > max || value < min ? rule.weight : dist * rule.weight / (max-min);
                                 default:
-                                    return value >= min && value <= max ? 0 : 10;
+                                    return value >= min && value <= max ? 0 : MAX;
                                     break;
                             }
                         }
@@ -178,12 +203,16 @@
                 }
                 if (typeof value == "object" && value instanceof Array) {
                     Log("- - error: not implemented<br/>");
-                    return 10;
+                    return MAX;
                 }
                 Log("- - error: wrong value <br/>");
-                return 10;
+                return MAX;
             }
 
+            /*
+            Const
+            result 0 or max
+            */
             function RuleConst(rule, source, target) {
                 var value = source[rule.sourceField];
                 Log(" - - " + JSON.stringify(value) + " =?= " + JSON.stringify(rule.const) + "<br/>");
