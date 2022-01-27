@@ -1,0 +1,93 @@
+{
+    "id":"C001",
+    "rules":    [
+    {
+        "sourceField": "type",
+        "function": "const",
+        "const": [ "A" ],
+        "targetField": [],
+        "rule": "must",
+        "weight": 10
+    },
+    {
+        "sourceField": "offer",
+        "function": "const",
+        "const": [ true ],
+        "targetField": [],
+        "rule": "must",
+        "weight": 10
+    },
+    {
+        "sourceField": "age",
+        "function": "range",
+        "const": [],
+        "targetField": [ "age" ],
+        "rule": "offset from center",
+        "weight": 0.01
+    },
+    {
+        "sourceField": "gender",
+        "function": "exists",
+        "const": [],
+        "targetField": [ "gender" ],
+        "rule": "float",
+        "weight": 1
+    },
+    {
+        "sourceField": "persuasion",
+        "function": "exists",
+        "const": [],
+        "targetField": [ "persuasion" ],
+        "rule": "float",
+        "weight": 1
+    },
+    {
+        "sourceField": "interest",
+        "function": "exists",
+        "const": [],
+        "targetField": [ "interest" ],
+        "rule": "multiply",
+        "weight": 0.1
+    },
+    {
+        "sourceField": "job",
+        "function": "exists",
+        "const": [],
+        "targetField": [ "job" ],
+        "rule": "float",
+        "weight": 1
+    },
+    {
+        "sourceField": "family",
+        "function": "exists",
+        "const": [],
+        "targetField": [ "family" ],
+        "rule": "float",
+        "weight": 1
+    },
+    {
+        "sourceField": "children",
+        "function": "range",
+        "const": [],
+        "targetField": [ "children" ],
+        "rule": "offset from bottom",
+        "weight": 0.1
+    },
+    {
+        "sourceField": "income",
+        "function": "range",
+        "const": [],
+        "targetField": [ "income" ],
+        "rule": "offset from center",
+        "weight": 0.00001
+    },
+    {
+        "sourceField": "savings",
+        "function": "range",
+        "const": [],
+        "targetField": [ "savings" ],
+        "rule": "offset from top",
+        "weight": 0.000001
+    }
+]
+}

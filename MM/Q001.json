@@ -1,0 +1,16 @@
+{
+    "id": "Q001",
+    "type": "A",
+    "offer": true,
+    "name": "Tonia",
+
+    "age": [30,50],
+    "gender": ["male"],
+    "persuasion": ["male"],
+    "interest": [ "robots", "shoes" ],
+    "job": [true, false],
+    "family": ["free","divorced"],
+    "children": [0,2],
+    "income": [0,100000],
+    "savings": [0,10000000]
+}

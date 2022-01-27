@@ -1,0 +1,15 @@
+{
+    "id": "A004",
+    "type": "A",
+    "offer": true,
+    "name": "Tina",
+    "age": 40,
+    "gender": "female",
+    "persuasion": "female",
+    "interest": [ "robots"],
+    "job": true,
+    "family": "free",
+    "children": 2,
+    "income": 95000,
+    "savings": 2114500
+}

@@ -1,0 +1,15 @@
+{
+    "id": "A003",
+    "type": "A",
+    "offer": false,
+    "name": "Marry",
+    "age": 20,
+    "gender": "female",
+    "persuasion": "male",
+    "interest": [ "art", "robots"],
+    "job": true,
+    "family": "free",
+    "children": 0,
+    "income": 45000,
+    "savings": 114500
+}

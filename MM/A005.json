@@ -1,0 +1,15 @@
+{
+    "id": "A005",
+    "type": "B",
+    "offer": true,
+    "name": "Jina",
+    "age": 33,
+    "gender": "female",
+    "persuasion": "female",
+    "city": "Sofia",
+    "address": "Lulin 5",
+    "floor": 5,
+    "rooms": 3,
+    "size": 120,
+    "direction": ["S", "SW", "W"]
+}

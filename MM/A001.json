@@ -1,0 +1,15 @@
+{
+    "id": "A001",
+    "type": "A",
+    "offer": true,
+    "name": "Harry",
+    "age": 34,
+    "gender": "male",
+    "persuasion": "male",
+    "interest": [ "cars", "art", "robots"],
+    "job": true,
+    "family": "divorced",
+    "children": 3,
+    "income": 65000,
+    "savings": 4500
+}

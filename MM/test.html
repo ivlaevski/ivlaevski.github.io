@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MM Test</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+    <button id="Start">Start</button>
+    <hr />
+    <p id="Console"></p>
+    <script>
+        $(document).ready(function () {
+            var files = ["A001.json", "A002.json", "A003.json", "A004.json", "A005.json", "Q001.json", "Q002.json", "C001.json"];
+            var questions = [];
+            var offers = [];
+            var configs = [];
+
+            function LoadFiles(FileName) {
+                var dfd = $.Deferred();
+                $.getJSON(FileName, function (data) {
+                    Log(data.id + "<br/>");
+                    if (data.id[0] === "A") {
+                        offers.push(data);
+                    }
+                    if (data.id[0] === "Q") {
+                        questions.push(data);
+                    }
+                    if (data.id[0] === "C") {
+                        configs.push(data);
+                    }
+                    dfd.resolve();
+                }).fail(function () {
+                    Log("An error has occurred.<br/>");
+                    dfd.resolve();
+                });
+                return dfd.promise();
+            }
+
+            for (var i = 0; i < files.length; i++) {
+                LoadFiles(files[i]);
+            }
+
+            $("#Start").click(function () {
+                Log("<hr/>");
+                for (var q = 0; q < questions.length; q++) {
+                    var answers = [];
+                    var question = questions[q];
+                    for (var c = 0; c < configs.length; c++) {
+                        var config = configs[c];
+                        for (var o = 0; o < offers.length; o++) {
+                            var offer = offers[o];
+                            var result = Compare(config, question, offer);
+                            answers.push(
+                                {
+                                    "weight": result,
+                                    "match": offer,
+                                    "config": config.id
+                                }
+                            )
+                        }
+                    }
+                    answers.sort(function (a, b) {
+                        return b.weight - a.weight;
+                    })
+                    Log("<hr/><h1>" + question.id + "</h1><ul>");
+                    Log(JSON.stringify(question) + "<br/>");
+                    for (var a = 0; a < answers.length; a++) {
+                        var answer = answers[a];
+                        Log("<li>" + answer.weight + " [" + answer.config + "]<br/>");
+                        Log(JSON.stringify(answer.match) + "</li>");
+                    }
+                    Log("</ul><hr/>")
+                }
+            });
+
+            function Compare(configuration, search, profile) {
+                Log(configuration.id + "-" + search.id + "-" + profile.id + "<br/>");
+                if (search.type !== profile.type) {
+                    Log("- no type match<br/>");
+                    return -99999;
+                }
+                var weight = 10;
+                for (var r = 0; r < configuration.rules.length; r++) {
+                    var rule = configuration.rules[r];
+                    var res = 10;
+                    Log(" - " + rule.sourceField + " [" + rule.function + "][" + rule.rule + "][" + rule.weight +"] " + JSON.stringify(rule.targetField) + "<br/>");
+                    switch (rule.function) {
+                        case "const":
+                            res = RuleConst(rule, profile, search);
+                            break;
+                        case "range":
+                            res = RuleRange(rule, profile, search);
+                            break;
+                        case "exists": 
+                            res = RuleExists(rule, profile, search);
+                            break;
+                        default:
+                            Log("- missing function [" + rule.function + "]<br/>")
+                            break;
+                    }
+                    Log(" - - Reulst: " + res + "<br/>");
+                    weight -= res;
+                }
+                return weight;
+            }
+
+            function RuleExists(rule, source, target) {                
+                var value = source[rule.sourceField];
+                var compareS = [];
+                if (typeof value == "object" && value instanceof Array) {
+                    compareS = compareS.concat(value);
+                } else {
+                    compareS.push(value);
+                }
+                var maxFit = 0;
+                for (var t = 0; t < rule.targetField.length; t++) {
+                    var targetValue = target[rule.targetField[t]];
+                    Log(" - - " + JSON.stringify(value) + " =?= " + JSON.stringify(targetValue) + "<br/>");
+                    var compareT = [];
+                    if (typeof targetValue == "object" && targetValue instanceof Array) {
+                        compareT = compareT.concat(targetValue);
+                    } else {
+                        compareT.push(targetValue);
+                    }
+                    var thisFit = 0;
+                    for (var x = 0; x < compareT.length; x++) {
+                        if (compareT[x] === "*" && compareS.length > 0) {
+                            thisFit += compareS.length;
+                        } else {
+                            for (var y = 0; y < compareS.length; y++) {
+                                if (compareT[x] === compareS[y]) {
+                                    thisFit++;
+                                }
+                            }
+                        }                        
+                    }
+                    if (maxFit < thisFit) {
+                        maxFit = thisFit;
+                    }
+                }
+                switch (rule.rule) {
+                    case "multiply":
+                        return - maxFit*rule.weight;                 
+                    default: //float
+                        return maxFit === 0 ? rule.weight : 0;
+                }
+            }
+
+            function RuleRange(rule, source, target) {
+                var value = source[rule.sourceField];                
+                if (typeof value == "number") {
+                    for (var t = 0; t < rule.targetField.length; t++) {
+                        var targetValue = target[rule.targetField[t]];
+                        Log(" - - " + JSON.stringify(value) + " =?= " + JSON.stringify(targetValue) + "<br/>");
+                        if (typeof targetValue == "object" && targetValue instanceof Array && targetValue.length === 2) {
+                            var min = targetValue[0];
+                            var max = targetValue[1];
+                            if (typeof min !== "number" || typeof max !== "number") {
+                                Log("- error: not number at range Q: " + rule.targetField[t] + "<br/>");
+                                return 10;
+                            }
+                            switch (rule.rule) {
+                                case "offset from center":
+                                    return rule.weight * Math.abs(value - (((max - min) / 2) + min));
+                                case "offset from bottom":
+                                    return rule.weight * Math.abs(value - min);
+                                case "offset from top":
+                                    return rule.weight * Math.abs(value - max);
+                                default:
+                                    return value >= min && value <= max ? 0 : 10;
+                                    break;
+                            }
+                        }
+                    }
+                }
+                if (typeof value == "object" && value instanceof Array) {
+                    Log("- - error: not implemented<br/>");
+                    return 10;
+                }
+                Log("- - error: wrong value <br/>");
+                return 10;
+            }
+
+            function RuleConst(rule, source, target) {
+                var value = source[rule.sourceField];
+                Log(" - - " + JSON.stringify(value) + " =?= " + JSON.stringify(rule.const) + "<br/>");
+                if (typeof value == "undefined" && ExistsInArray("undefined", rule.const)) {
+                    return 0;
+                }
+                if (typeof value == "object" && value instanceof Array) {
+                    var res = true;
+                    for (var z = 0; z < value.length; z++) {
+                        res = res && ExistsInArray(value[z], rule.const)
+                    }
+                    return res == true ? 0 : rule.weight;
+                }
+                if (ExistsInArray(value, rule.const)) {
+                    return 0;
+                }
+                return rule.weight;
+            }
+
+            function ExistsInArray(val, arr) {
+                for (var i = 0; i < arr.length; i++) {
+                    if (val === arr[i]) { return true; }
+                }
+                return false;
+            }
+
+            function Log(text) {
+                $("#Console").html($("#Console").html() + text);
+            }
+        });
+    </script>
+</body>
+
+</html>

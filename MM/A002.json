@@ -1,0 +1,15 @@
+{
+    "id": "A002",
+    "type": "A",
+    "offer": true,
+    "name": "John",
+    "age": 14,
+    "gender": "male",
+    "persuasion": "male",
+    "interest": [ "cars" ],
+    "job": false,
+    "family": "child",
+    "children": 0,
+    "income": 0,
+    "savings": 45
+}
