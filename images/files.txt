@@ -1,0 +1,32 @@
+ Volume in drive C is Windows-SSD
+ Volume Serial Number is 78D2-8C3E
+
+ Directory of C:\WORK\ivlaevski.github.io\images
+
+01-Oct-23  09:08 AM    <DIR>          .
+25-Apr-23  12:50 PM    <DIR>          ..
+24-Apr-22  08:50 AM            30,605 20220424.png
+24-Apr-22  08:50 AM         1,456,472 20220424m.png
+31-Jul-22  10:23 AM     1,742,465,623 5min.mov
+01-Oct-23  09:03 AM         5,735,844 Backgorund.gif
+10-Mar-22  02:39 PM           154,556 Bible Verses and Cross Wallpapers Christian Wallpapers.jpeg
+10-Mar-22  02:40 PM           220,304 blue-powerpoint.jpg
+01-Oct-23  08:58 AM           229,312 blue1.jpg
+10-Apr-22  11:24 AM        11,265,433 bv-velikden2.png
+10-Apr-22  11:29 AM         1,796,517 bv-velikden3.png
+01-Oct-23  09:00 AM         2,907,406 candle.gif
+01-Oct-23  08:54 AM            48,200 clouds1.jpg
+01-Oct-23  08:55 AM        10,045,708 colorboom.jpg
+01-Oct-23  09:01 AM         1,669,661 desert.gif
+01-Oct-23  09:08 AM                 0 files.txt
+05-Jun-22  11:53 AM        10,865,367 june.png
+01-Oct-23  08:56 AM         1,147,373 path.png
+08-May-22  09:30 AM           757,936 proektor-man.png
+08-May-22  09:30 AM           354,912 proektor-prom.png
+16-Apr-22  02:21 PM         1,378,427 proektor-size.png
+16-Apr-22  02:21 PM            54,069 proektor-size2.png
+01-Oct-23  08:55 AM         5,514,728 reddot.jpg
+01-Oct-23  08:57 AM           403,047 redsmoke.jpeg
+01-Oct-23  09:02 AM           621,395 StarfieldSimulation001.gif
+              23 File(s)  1,799,122,895 bytes
+               2 Dir(s)  546,943,062,016 bytes free
