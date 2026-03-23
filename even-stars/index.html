@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Even Stars - Sky Chart</title>
+  <style>
+    /* Even Realities Design System - Custom Properties */
+    :root {
+      /* Colors */
+      --color-bg-primary: #000000;
+      --color-bg-secondary: #1a1a1a;
+      --color-bg-tertiary: #2a2a2a;
+      --color-surface: #1c1c1c;
+      --color-border: #333333;
+      --color-border-subtle: #262626;
+      
+      /* Accent Colors */
+      --color-accent-primary: #007AFF;
+      --color-accent-secondary: #5AC8FA;
+      --color-success: #34C759;
+      --color-warning: #FF9500;
+      --color-error: #FF3B30;
+      
+      /* Text Colors */
+      --color-text-primary: #FFFFFF;
+      --color-text-secondary: rgba(255, 255, 255, 0.7);
+      --color-text-tertiary: rgba(255, 255, 255, 0.5);
+      --color-text-inverse: #000000;
+      
+      /* Typography */
+      --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      --font-size-xs: 11px;
+      --font-size-sm: 13px;
+      --font-size-md: 15px;
+      --font-size-lg: 17px;
+      --font-size-xl: 20px;
+      --font-size-2xl: 24px;
+      
+      /* Spacing */
+      --space-4: 4px;
+      --space-8: 8px;
+      --space-12: 12px;
+      --space-16: 16px;
+      --space-20: 20px;
+      --space-24: 24px;
+      --space-32: 32px;
+      
+      /* Border Radius */
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-full: 9999px;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+      
+      /* Transitions */
+      --transition-fast: 150ms ease;
+      --transition-normal: 250ms ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--color-bg-primary);
+      font-family: var(--font-family);
+      color: var(--color-text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* App Container */
+    .app {
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: var(--space-16);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-12);
+      padding-top: var(--space-8);
+    }
+
+    .header-content {
+      flex: 1;
+    }
+
+    .app-title {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: var(--space-4);
+      background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .app-subtitle {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      font-weight: 400;
+    }
+
+    /* Connection Badge */
+    .connection-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      transition: all var(--transition-fast);
+    }
+
+    .connection-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: var(--radius-full);
+      background: currentColor;
+    }
+
+    .connection-badge.connected {
+      background: rgba(52, 199, 89, 0.15);
+      color: var(--color-success);
+    }
+
+    .connection-badge.disconnected {
+      background: rgba(255, 59, 48, 0.15);
+      color: var(--color-error);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border-subtle);
+      overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .card:active {
+      transform: scale(0.995);
+    }
+
+    .card-header {
+      padding: var(--space-16) var(--space-16) var(--space-8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-12);
+    }
+
+    .card-title {
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .card-content {
+      padding: 0 var(--space-16) var(--space-16);
+    }
+
+    .card-content:first-child {
+      padding-top: var(--space-16);
+    }
+
+    /* Status Grid */
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+
+    .status-item {
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-md);
+      padding: var(--space-12);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      border: 1px solid var(--color-border-subtle);
+    }
+
+    .status-label {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      font-weight: 500;
+    }
+
+    .status-value {
+      font-size: var(--font-size-md);
+      font-weight: 600;
+      color: var(--color-text-primary);
+      word-break: break-word;
+    }
+
+    .status-value.small {
+      font-size: var(--font-size-sm);
+    }
+
+    /* Help Card */
+    .help-list {
+      list-style: none;
+      counter-reset: steps;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-12);
+    }
+
+    .help-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-12);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+      line-height: 1.5;
+    }
+
+    .help-item::before {
+      counter-increment: steps;
+      content: counter(steps);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: var(--radius-full);
+      background: var(--color-accent-primary);
+      color: white;
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Settings */
+    .settings-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .setting-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-12);
+      padding: var(--space-16) 0;
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .setting-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .setting-item:first-child {
+      padding-top: 0;
+    }
+
+    .setting-label {
+      font-size: var(--font-size-md);
+      color: var(--color-text-primary);
+      font-weight: 500;
+    }
+
+    .setting-hint {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-tertiary);
+      margin-top: var(--space-4);
+    }
+
+    /* Form Controls */
+    .select {
+      appearance: none;
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      font-family: inherit;
+      font-size: var(--font-size-sm);
+      padding: var(--space-8) var(--space-28) var(--space-8) var(--space-12);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.5L6 8L9.5 4.5' stroke='white' stroke-opacity='0.5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--space-8) center;
+      cursor: pointer;
+      min-width: 120px;
+      transition: border-color var(--transition-fast);
+    }
+
+    .select:focus {
+      outline: none;
+      border-color: var(--color-accent-primary);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-8);
+      padding: var(--space-8) var(--space-16);
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all var(--transition-fast);
+      background: var(--color-bg-tertiary);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+
+    .button:hover {
+      background: var(--color-accent-primary);
+      border-color: var(--color-accent-primary);
+    }
+
+    .button:active {
+      transform: scale(0.96);
+    }
+
+    .button.secondary {
+      background: transparent;
+      border-color: var(--color-border);
+    }
+
+    .button.secondary:hover {
+      background: var(--color-bg-tertiary);
+      border-color: var(--color-border);
+    }
+
+    /* Icon Button */
+    .icon-button {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-primary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .icon-button:hover {
+      background: var(--color-accent-primary);
+      border-color: var(--color-accent-primary);
+    }
+
+    /* Sky Preview */
+    .sky-preview {
+      width: 100%;
+      aspect-ratio: 2 / 1;
+      background: linear-gradient(180deg, #0a1628 0%, #1a2d4a 50%, #0d1a2d 100%);
+      border-radius: var(--radius-md);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sky-preview::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(1px 1px at 20px 30px, white, transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, white, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 160px 120px, white, transparent);
+      background-size: 200px 200px;
+      animation: twinkle 4s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    .sky-preview-placeholder {
+      color: var(--color-text-tertiary);
+      font-size: var(--font-size-sm);
+      z-index: 1;
+      text-align: center;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: auto;
+      padding-top: var(--space-16);
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-tertiary);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-16);
+      margin-top: var(--space-8);
+    }
+
+    .footer-link {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-tertiary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: var(--space-4);
+      transition: color var(--transition-fast);
+    }
+
+    .footer-link:hover {
+      color: var(--color-accent-primary);
+    }
+
+    /* Developer Panel */
+    .dev-panel {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-16);
+      z-index: 100;
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+
+    .dev-panel.visible {
+      display: block;
+    }
+
+    .dev-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-12);
+    }
+
+    .dev-panel-title {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .dev-panel-close {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-primary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .dev-panel-close:hover {
+      background: var(--color-error);
+      border-color: var(--color-error);
+    }
+
+    .dev-panel-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+    }
+
+    .dev-section {
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-md);
+      padding: var(--space-12);
+      border: 1px solid var(--color-border-subtle);
+    }
+
+    .dev-section-title {
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: var(--space-12);
+    }
+
+    .dev-button-row {
+      display: flex;
+      gap: var(--space-8);
+      flex-wrap: wrap;
+    }
+
+    .dev-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-8);
+      padding: var(--space-10) var(--space-16);
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all var(--transition-fast);
+      background: var(--color-accent-primary);
+      color: white;
+    }
+
+    .dev-button:hover {
+      background: var(--color-accent-secondary);
+    }
+
+    .dev-button:active {
+      transform: scale(0.96);
+    }
+
+    .dev-button.secondary {
+      background: var(--color-bg-tertiary);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+
+    .dev-button.secondary:hover {
+      background: var(--color-border);
+    }
+
+    .dev-log {
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      padding: var(--space-12);
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      min-height: 80px;
+      max-height: 120px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .dev-log:empty::before {
+      content: 'Events will appear here...';
+      color: var(--color-text-tertiary);
+      font-style: italic;
+    }
+
+    /* Dev panel overlay backdrop */
+    .dev-panel-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 99;
+    }
+
+    .dev-panel-backdrop.visible {
+      display: block;
+    }
+
+    /* Target Pill */
+    .target-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-10);
+      background: var(--color-accent-primary);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: white;
+    }
+
+    .target-pill:empty {
+      display: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 400px) {
+      .app {
+        padding: var(--space-12);
+      }
+      
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-8);
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Safe Area for Mobile */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .app {
+        padding-bottom: calc(var(--space-16) + env(safe-area-inset-bottom));
+      }
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/main-Cc8C41KA.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-xMVzXGLZ.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1 class="app-title">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align: middle; margin-right: 8px; color: var(--color-accent-secondary);">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          Even Stars
+        </h1>
+        <p class="app-subtitle">Sky Chart for Even Realities Glasses</p>
+      </div>
+      <span id="connection-badge" class="connection-badge disconnected">Disconnected</span>
+    </header>
+
+    <!-- Quick Help Card -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">How to Use</span>
+      </div>
+      <div class="card-content">
+        <ol class="help-list">
+          <li class="help-item">Wear the glasses and keep this app open on your phone.</li>
+          <li class="help-item">Look around naturally: the sky map follows your head movement.</li>
+          <li class="help-item">Use the glasses menus to pick a target or change what is displayed.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Status Card -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Current Status</span>
+        <span id="target-pill" class="target-pill"></span>
+      </div>
+      <div class="card-content">
+        <div class="status-grid">
+          <div class="status-item">
+            <span class="status-label">View Mode</span>
+            <span id="mode-value" class="status-value">Stars</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Location</span>
+            <span id="location-value" class="status-value small">Unknown</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Orientation</span>
+            <span id="orientation-value" class="status-value small">0°, 0°, 0°</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Status</span>
+            <span id="status-value" class="status-value small">Waiting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Card -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Settings</span>
+      </div>
+      <div class="card-content">
+        <div class="settings-list">
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Sky Mode</div>
+              <div class="setting-hint">Choose what to display</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-8);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-text-tertiary);">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9,22 9,12 15,12 15,22"/>
+              </svg>
+              <select id="setting-view-mode" class="select">
+                <option value="Stars">Stars</option>
+                <option value="Constellations">Constellations</option>
+                <option value="Planets">Planets</option>
+                <option value="DeepSky">Deep Sky</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Location</div>
+              <div id="setting-location-status" class="setting-hint">Uses your phone GPS when available</div>
+            </div>
+            <button id="setting-refresh-location" class="button secondary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+              </svg>
+              Refresh
+            </button>
+          </div>
+          
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Orientation</div>
+              <div class="setting-hint">Reset head tracking calibration</div>
+            </div>
+            <button id="setting-reset-orientation" class="button secondary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"/>
+                <path d="M3 3v9h9"/>
+              </svg>
+              Reset
+            </button>
+          </div>
+
+          <!-- OpenAI API Key -->
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">OpenAI API Key</div>
+              <div id="setting-openai-key-status" class="setting-hint">Required for voice search (Find Target)</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-8); flex-wrap: wrap;">
+              <input 
+                id="setting-openai-key" 
+                type="password" 
+                placeholder="sk-..." 
+                autocomplete="off"
+                spellcheck="false"
+                style="
+                  background: var(--color-bg-secondary);
+                  border: 1px solid var(--color-border);
+                  border-radius: var(--radius-sm);
+                  color: var(--color-text-primary);
+                  font-family: monospace;
+                  font-size: var(--font-size-sm);
+                  padding: var(--space-4) var(--space-8);
+                  width: 180px;
+                  outline: none;
+                  transition: border-color var(--transition-fast);
+                "
+                onfocus="this.style.borderColor='var(--color-accent-primary)'"
+                onblur="this.style.borderColor='var(--color-border)'"
+              />
+              <button id="setting-openai-key-toggle" class="button secondary" style="padding: var(--space-4) var(--space-8); font-size: var(--font-size-xs);">
+                Show
+              </button>
+              <button id="setting-openai-key-save" class="button secondary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                  <polyline points="17 21 17 13 7 13 7 21"/>
+                  <polyline points="7 3 7 8 15 8"/>
+                </svg>
+                Save
+              </button>
+            </div>
+          </div>
+
+          <!-- OpenAI Model Selection -->
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">AI Model</div>
+              <div id="setting-model-status" class="setting-hint">Used for AI-powered object identification</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-8); flex-wrap: wrap;">
+              <select
+                id="setting-model-select"
+                style="
+                  background: var(--color-bg-secondary);
+                  border: 1px solid var(--color-border);
+                  border-radius: var(--radius-sm);
+                  color: var(--color-text-primary);
+                  font-size: var(--font-size-sm);
+                  padding: var(--space-4) var(--space-8);
+                  min-width: 180px;
+                  outline: none;
+                  transition: border-color var(--transition-fast);
+                "
+              >
+                <option value="">Loading models…</option>
+              </select>
+              <button id="setting-model-refresh" class="button secondary" style="padding: var(--space-4) var(--space-8); font-size: var(--font-size-xs);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"/>
+                  <path d="M3 3v9h9"/>
+                </svg>
+                Refresh
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer-text">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        Even Stars v1.0
+      </p>
+      <div class="footer-links">
+        <button id="dev-panel-toggle" class="footer-link">Developer panel</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Developer Panel Backdrop -->
+  <div id="dev-panel-backdrop" class="dev-panel-backdrop"></div>
+
+  <!-- Developer Panel -->
+  <div id="dev-panel" class="dev-panel">
+    <div class="dev-panel-header">
+      <span class="dev-panel-title">Developer Panel</span>
+      <button id="dev-panel-close" class="dev-panel-close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="dev-panel-content">
+      <div class="dev-section">
+        <div class="dev-section-title">Simulate Events</div>
+        <div class="dev-button-row">
+          <button id="dev-simulate-click" class="dev-button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="12" r="1"/>
+            </svg>
+            Simulate Click
+          </button>
+          <button id="dev-simulate-double-click" class="dev-button secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            Simulate Double Click
+          </button>
+        </div>
+      </div>
+      <div class="dev-section">
+        <div class="dev-section-title">Event Log</div>
+        <div id="dev-event-log" class="dev-log"></div>
+      </div>
+      <div class="dev-section">
+        <div class="dev-section-title">Find Target (Manual)</div>
+        <div style="display: flex; align-items: center; gap: var(--space-8); flex-wrap: wrap; margin-bottom: var(--space-8);">
+          <input 
+            id="find-target-text-input" 
+            type="text" 
+            placeholder="Star or object name..." 
+            autocomplete="off"
+            spellcheck="false"
+            style="
+              background: var(--color-bg-secondary);
+              border: 1px solid var(--color-border);
+              border-radius: var(--radius-sm);
+              color: var(--color-text-primary);
+              font-size: var(--font-size-sm);
+              padding: var(--space-8);
+              flex: 1;
+              min-width: 100px;
+              outline: none;
+              transition: border-color var(--transition-fast);
+            "
+            onfocus="this.style.borderColor='var(--color-accent-primary)'"
+            onblur="this.style.borderColor='var(--color-border)'"
+          />
+          <button id="find-target-search-btn" class="dev-button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+            Find
+          </button>
+        </div>
+        <div id="find-target-result" style="display: none; padding: var(--space-8); background: var(--color-bg-secondary); border-radius: var(--radius-sm); border-left: 3px solid var(--color-accent-primary);">
+          <div style="font-weight: 600; color: var(--color-accent-primary); font-size: var(--font-size-sm);">✓ Found:</div>
+          <div id="find-target-result-name" style="font-size: var(--font-size-sm); color: var(--color-text-primary); margin-top: var(--space-4);"></div>
+        </div>
+        <div id="find-target-status" style="margin-top: var(--space-8); font-size: var(--font-size-xs); color: var(--color-text-secondary);">
+          Enter text to search
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Developer Panel Functionality
+    (function() {
+      const devPanel = document.getElementById('dev-panel');
+      const devPanelBackdrop = document.getElementById('dev-panel-backdrop');
+      const devPanelToggle = document.getElementById('dev-panel-toggle');
+      const devPanelClose = document.getElementById('dev-panel-close');
+      const devSimulateClick = document.getElementById('dev-simulate-click');
+      const devSimulateDoubleClick = document.getElementById('dev-simulate-double-click');
+      const devEventLog = document.getElementById('dev-event-log');
+
+      function openDevPanel() {
+        devPanel.classList.add('visible');
+        devPanelBackdrop.classList.add('visible');
+      }
+
+      function closeDevPanel() {
+        devPanel.classList.remove('visible');
+        devPanelBackdrop.classList.remove('visible');
+      }
+
+      function logEvent(message) {
+        const timestamp = new Date().toLocaleTimeString();
+        const logEntry = `[${timestamp}] ${message}`;
+        if (devEventLog.textContent === 'Events will appear here...') {
+          devEventLog.textContent = logEntry;
+        } else {
+          devEventLog.textContent = logEntry + '\n' + devEventLog.textContent;
+        }
+      }
+
+      // Toggle panel
+      devPanelToggle.addEventListener('click', openDevPanel);
+      devPanelClose.addEventListener('click', closeDevPanel);
+      devPanelBackdrop.addEventListener('click', closeDevPanel);
+
+      // Simulate click event
+      devSimulateClick.addEventListener('click', function() {
+        // Dispatch a simulated click event
+        const simulatedEvent = new CustomEvent('simulatedClick', {
+          detail: { source: 'developer-panel', timestamp: Date.now() },
+          bubbles: true,
+          cancelable: true
+        });
+        document.dispatchEvent(simulatedEvent);
+        
+        logEvent('Click event dispatched');
+        
+        // Also trigger a standard click on the body to simulate user interaction
+        const clickEvent = new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          clientX: window.innerWidth / 2,
+          clientY: window.innerHeight / 2
+        });
+        document.body.dispatchEvent(clickEvent);
+      });
+
+      // Simulate double click event
+      devSimulateDoubleClick.addEventListener('click', function() {
+        // Dispatch a simulated double-click event
+        const simulatedEvent = new CustomEvent('simulatedDoubleClick', {
+          detail: { source: 'developer-panel', timestamp: Date.now() },
+          bubbles: true,
+          cancelable: true
+        });
+        document.dispatchEvent(simulatedEvent);
+        
+        logEvent('Double click event dispatched');
+        
+        // Also trigger a standard dblclick on the body
+        const dblClickEvent = new MouseEvent('dblclick', {
+          bubbles: true,
+          cancelable: true,
+          clientX: window.innerWidth / 2,
+          clientY: window.innerHeight / 2
+        });
+        document.body.dispatchEvent(dblClickEvent);
+      });
+
+      // Listen for the simulated events (example handlers)
+      document.addEventListener('simulatedClick', function(e) {
+        console.log('Simulated click received:', e.detail);
+      });
+
+      document.addEventListener('simulatedDoubleClick', function(e) {
+        console.log('Simulated double click received:', e.detail);
+      });
+
+      // Log actual click/dblclick events for demonstration
+      document.body.addEventListener('click', function(e) {
+        if (e.target.closest('.dev-panel') || e.target.closest('#dev-panel-toggle')) return;
+        logEvent(`Body click at (${Math.round(e.clientX)}, ${Math.round(e.clientY)})`);
+      });
+
+      document.body.addEventListener('dblclick', function(e) {
+        if (e.target.closest('.dev-panel') || e.target.closest('#dev-panel-toggle')) return;
+        logEvent(`Body double-click at (${Math.round(e.clientX)}, ${Math.round(e.clientY)})`);
+      });
+    })();
+  </script>
+</body>
+</html>
