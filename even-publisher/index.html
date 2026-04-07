@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Even Publisher – G2</title>
+    <title>Article Publisher – G2</title>
     <style>
       body {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -81,6 +81,16 @@
         outline: 2px solid #4f46e5;
         outline-offset: 1px;
         border-color: transparent;
+      }
+
+      textarea:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+      }
+
+      #research-refinement .btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
       }
 
       .btn {
@@ -225,31 +235,66 @@
       .ai-settings-header-row h2 {
         margin: 0;
       }
+
+      #g2-connection-body[hidden],
+      #g2-connection-connected[hidden] {
+        display: none !important;
+      }
     </style>
-    <script type="module" crossorigin src="./index-B4SwWxXz.js"></script>
+    <script type="module" crossorigin src="./index-Cpw3Ztmm.js"></script>
   </head>
   <body>
     <div id="app">
       <header>
-        <h1>Even Publisher <span class="app-version">v1.0.107</span></h1>
+        <h1>Article Publisher <span class="app-version">v1.0.108</span></h1>
         <p class="muted">
-          Connect your G2 glasses, configure OpenAI and WordPress, then drive the whole publishing flow from the
+          Connect your G2 glasses, configure Gemini + search grounding, ElevenLabs,OpenAI and WordPress, then drive the whole publishing flow from the
           glasses.
         </p>
       </header>
 
       <div class="grid">
         <section class="card" id="g2-connection">
-          <h2>G2 Connection</h2>
-          <p class="muted">Starts the Even Hub bridge and boots the glasses UI.</p>
-          <div class="btn-row">
-            <button id="connectBtn" class="btn btn-primary">
-              Connect glasses
-            </button>            
+          <div id="g2-connection-body">
+            <h2>G2 Connection</h2>
+            <p class="muted">Starts the Even Hub bridge and boots the glasses UI.</p>
+            <div class="btn-row">
+              <button id="connectBtn" class="btn btn-primary">
+                Connect glasses
+              </button>
+            </div>
+            <div style="margin-top: 0.75rem; font-size: 0.75rem; color: #6b7280;">
+              <span class="badge">Tip</span>
+              &nbsp;On the glasses, use tap, double-tap and swipe gestures to navigate menus.
+            </div>
           </div>
-          <div style="margin-top: 0.75rem; font-size: 0.75rem; color: #6b7280;">
-            <span class="badge">Tip</span>
-            &nbsp;On the glasses, use tap, double-tap and swipe gestures to navigate menus.
+          <p id="g2-connection-connected" class="muted" hidden style="margin: 0">
+            Bridge connected — use the glasses main menu.
+          </p>
+        </section>
+
+        <section class="card" id="research-refinement">
+          <h2>Prompt Research refinement</h2>
+
+          <div id="research-status" class="muted" style="margin-bottom: 0.5rem;">
+            No research selected on glasses.
+          </div>
+
+          <label for="prompt-text">Prompt to update current research</label>
+          <textarea
+            id="prompt-text"
+            rows="3"
+            disabled
+            placeholder="Example: Make the tone more optimistic and add a short call-to-action at the end."
+          ></textarea>
+
+          <div class="btn-row">
+            <button id="prompt-submit" class="btn btn-primary" type="button" disabled>
+              Apply prompt to research
+            </button>
+            <button id="use-transcript" class="btn btn-ghost" type="button" disabled>
+              Use last voice transcript
+            </button>
           </div>
         </section>
 
@@ -266,26 +311,6 @@
             <button id="topics-add" class="btn btn-primary">Add topic</button>
             <button id="topics-delete" class="btn btn-ghost">Delete selected</button>
             <button id="topics-save" class="btn btn-ghost">Save list</button>
-          </div>
-        </section>
-
-        <section class="card" id="research-refinement">
-          <h2>Prompt Research refinement</h2>
-
-          <div id="research-status" class="muted" style="margin-bottom: 0.5rem;">
-            No research selected on glasses.
-          </div>
-
-          <label for="prompt-text">Prompt to update current research</label>
-          <textarea
-            id="prompt-text"
-            rows="3"
-            placeholder="Example: Make the tone more optimistic and add a short call-to-action at the end."
-          ></textarea>
-
-          <div class="btn-row">
-            <button id="prompt-submit" class="btn btn-primary">Apply prompt to research</button>
-            <button id="use-transcript" class="btn btn-ghost">Use last voice transcript</button>
           </div>
         </section>
 
