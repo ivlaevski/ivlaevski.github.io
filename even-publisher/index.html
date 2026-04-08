@@ -269,7 +269,7 @@
   <body>
     <div id="app">
       <header>
-        <h1>Article Publisher <span class="app-version">v1.0.130</span></h1>
+        <h1>Article Publisher <span class="app-version">v1.0.131</span></h1>
         <p class="muted">
           Connect your G2 glasses, configure Gemini + search grounding, ElevenLabs,OpenAI and WordPress, then drive the whole publishing flow from the
           glasses.
@@ -277,6 +277,8 @@
       </header>
 
       <div class="grid">
+        <pre id="status">Booting…</pre>
+
         <section class="card" id="g2-connection">
           <div id="g2-connection-body">
             <h2>G2 Connection</h2>
@@ -294,44 +296,7 @@
           <p id="g2-connection-connected" class="muted" hidden style="margin: 0">
             Bridge connected — use the glasses main menu.
           </p>
-        </section>
-
-        <section class="card" id="phone-audio">
-          <h2>Phone audio (read aloud)</h2>
-          <p class="muted">
-            <strong>Read aloud</strong> plays ElevenLabs MP3 on <strong>this phone</strong> (built-in speaker,
-            wired headset, or Bluetooth). Browsers often block sound until you tap this page.
-            <strong>G2 voice refinement</strong> uses the <strong>glasses microphone</strong> (Even bridge), not the
-            phone mic — input list below is for reference and future use.
-          </p>
-          <div class="btn-row" style="margin-top: 0.75rem">
-            <button type="button" id="audio-unlock-test" class="btn btn-primary">
-              Unlock &amp; test phone speaker
-            </button>
-            <button type="button" id="audio-refresh-devices" class="btn btn-ghost">Refresh device list</button>
-          </div>
-          <p class="muted" style="margin-top: 0.5rem; margin-bottom: 0; font-size: 0.78rem">
-            Tap <strong>Unlock &amp; test</strong> once after opening the app so read aloud works from the glasses
-            without autoplay errors.
-          </p>
-
-          <label for="audio-output-select">Playback output (speaker / BT)</label>
-          <select id="audio-output-select" aria-describedby="audio-output-hint"></select>
-          <p id="audio-output-hint" class="muted" style="margin-top: 0.35rem; margin-bottom: 0; font-size: 0.75rem">
-            <span id="audio-sink-support-note"></span>
-            When supported (e.g. Chrome on Android), the next read-aloud clip uses this sink.
-            iOS Safari uses the system route only.
-          </p>
-
-          <label for="audio-input-select">Microphones on this device (informational)</label>
-          <select id="audio-input-select" aria-describedby="audio-input-hint"></select>
-          <p id="audio-input-hint" class="muted" style="margin-top: 0.35rem; margin-bottom: 0; font-size: 0.75rem">
-            Not used for STT in this app (G2 PCM → ElevenLabs). Saved for visibility / future features.
-          </p>
-
-          <p class="muted" style="margin-top: 0.75rem; margin-bottom: 0.25rem; font-size: 0.8rem">Detected devices</p>
-          <div id="audio-device-info">Loading…</div>
-        </section>
+        </section>        
 
         <section class="card" id="research-refinement">
           <h2>Prompt Research refinement</h2>
@@ -433,9 +398,45 @@
           </div>
           </div>
         </section>
-      </div>
 
-      <pre id="status">Booting…</pre>
+        <section class="card" id="phone-audio">
+          <h2>Phone audio (read aloud)</h2>
+          <p class="muted">
+            <strong>Read aloud</strong> plays ElevenLabs MP3 on <strong>this phone</strong> (built-in speaker,
+            wired headset, or Bluetooth). Browsers often block sound until you tap this page.
+            <strong>G2 voice refinement</strong> uses the <strong>glasses microphone</strong> (Even bridge), not the
+            phone mic — input list below is for reference and future use.
+          </p>
+          <div class="btn-row" style="margin-top: 0.75rem">
+            <button type="button" id="audio-unlock-test" class="btn btn-primary">
+              Unlock &amp; test phone speaker
+            </button>
+            <button type="button" id="audio-refresh-devices" class="btn btn-ghost">Refresh device list</button>
+          </div>
+          <p class="muted" style="margin-top: 0.5rem; margin-bottom: 0; font-size: 0.78rem">
+            Tap <strong>Unlock &amp; test</strong> once after opening the app so read aloud works from the glasses
+            without autoplay errors.
+          </p>
+
+          <label for="audio-output-select">Playback output (speaker / BT)</label>
+          <select id="audio-output-select" aria-describedby="audio-output-hint"></select>
+          <p id="audio-output-hint" class="muted" style="margin-top: 0.35rem; margin-bottom: 0; font-size: 0.75rem">
+            <span id="audio-sink-support-note"></span>
+            When supported (e.g. Chrome on Android), the next read-aloud clip uses this sink.
+            iOS Safari uses the system route only.
+          </p>
+
+          <label for="audio-input-select">Microphones on this device (informational)</label>
+          <select id="audio-input-select" aria-describedby="audio-input-hint"></select>
+          <p id="audio-input-hint" class="muted" style="margin-top: 0.35rem; margin-bottom: 0; font-size: 0.75rem">
+            Not used for STT in this app (G2 PCM → ElevenLabs). Saved for visibility / future features.
+          </p>
+
+          <p class="muted" style="margin-top: 0.75rem; margin-bottom: 0.25rem; font-size: 0.8rem">Detected devices</p>
+          <div id="audio-device-info">Loading…</div>
+        </section>
+      </div>
+      
       <pre id="event-log"></pre>
     </div>
 
