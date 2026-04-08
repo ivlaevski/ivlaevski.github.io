@@ -263,13 +263,52 @@
         opacity: 0.6;
         cursor: not-allowed;
       }
+
+      .research-manage-list {
+        list-style: none;
+        padding: 0;
+        margin: 0.35rem 0 0.25rem;
+        max-height: 200px;
+        overflow-y: auto;
+        border-radius: 0.5rem;
+        border: 1px solid #1f2937;
+        background: #020617;
+      }
+
+      .research-manage-list li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0.4rem 0.55rem;
+        font-size: 0.8rem;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.8);
+      }
+
+      .research-manage-list li:last-child {
+        border-bottom: none;
+      }
+
+      .research-manage-list .research-item-title {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .research-manage-list .research-delete {
+        flex-shrink: 0;
+        font-size: 0.72rem;
+        padding: 0.28rem 0.65rem;
+      }
     </style>
-    <script type="module" crossorigin src="./index-5Apj7oA-.js"></script>
+    <script type="module" crossorigin src="./index-BiAsDXL0.js"></script>
   </head>
   <body>
     <div id="app">
       <header>
-        <h1>Article Publisher <span class="app-version">v1.0.133</span></h1>
+        <h1>Article Publisher <span class="app-version">v1.0.134</span></h1>
         <p class="muted">
           Connect your G2 glasses, configure Gemini + search grounding, ElevenLabs,OpenAI and WordPress, then drive the whole publishing flow from the
           glasses.
@@ -318,6 +357,29 @@
             <button id="topics-delete" class="btn btn-ghost">Delete selected</button>
             <button id="topics-save" class="btn btn-ghost">Save list</button>
           </div>
+        </section>
+
+        <section class="card" id="draft-researches-phone">
+          <div class="ai-settings-header-row">
+            <h2>Draft researches</h2>
+            <button type="button" id="research-lists-refresh" class="btn btn-ghost">Refresh</button>
+          </div>
+          <p class="muted">
+            Drafts appear when you start or continue article research on the glasses. Delete removes the draft from shared
+            storage (same data as “Continue Old Article Research”).
+          </p>
+          <ul id="draft-researches-list" class="research-manage-list"></ul>
+          <p id="draft-researches-empty" class="muted" hidden style="margin: 0.35rem 0 0">No drafts.</p>
+        </section>
+
+        <section class="card" id="ready-researches-phone">
+          <h2>Ready for publishing</h2>
+          <p class="muted">
+            Items marked ready on the glasses. Delete removes them from the queue (same list as “Review Ready for
+            Publishing”).
+          </p>
+          <ul id="ready-researches-list" class="research-manage-list"></ul>
+          <p id="ready-researches-empty" class="muted" hidden style="margin: 0.35rem 0 0">Nothing ready yet.</p>
         </section>
 
         <section class="card" id="ai-settings">
