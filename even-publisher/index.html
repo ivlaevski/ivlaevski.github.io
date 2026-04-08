@@ -303,12 +303,12 @@
         padding: 0.28rem 0.65rem;
       }
     </style>
-    <script type="module" crossorigin src="./index-CC4ejM-P.js"></script>
+    <script type="module" crossorigin src="./index-DuzigIbJ.js"></script>
   </head>
   <body>
     <div id="app">
       <header>
-        <h1>Article Publisher <span class="app-version">v1.0.135</span></h1>
+        <h1>Article Publisher <span class="app-version">v1.0.136</span></h1>
         <p class="muted">
           Connect your G2 glasses, configure Gemini + search grounding, ElevenLabs,OpenAI and WordPress, then drive the whole publishing flow from the
           glasses.
@@ -476,8 +476,10 @@
             <button type="button" id="audio-refresh-devices" class="btn btn-ghost">Refresh device list</button>
           </div>
           <p class="muted" style="margin-top: 0.5rem; margin-bottom: 0; font-size: 0.78rem">
-            Tap <strong>Unlock &amp; test</strong> once after opening the app so read aloud works from the glasses
-            without autoplay errors.
+            <strong>Required on iPhone / many Android WebViews:</strong> tap <strong>Unlock &amp; test</strong> once on
+            this phone before using <strong>Read aloud</strong> on the glasses. Browsers only allow
+            <code>audio.play()</code> after a user tap; this page reuses one player so later lines work without
+            tapping again.
           </p>
 
           <label for="audio-output-select">Playback output (speaker / BT)</label>
