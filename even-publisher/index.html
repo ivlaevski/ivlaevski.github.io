@@ -14,6 +14,100 @@
         color: #f5f5f5;
       }
 
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+      }
+
+      .hamburger-btn {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 0.65rem;
+        border: 1px solid #1f2937;
+        background: #020617;
+        color: #e5e7eb;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.2rem;
+      }
+
+      .hamburger-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(2, 6, 23, 0.72);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 140ms ease;
+        z-index: 19;
+      }
+
+      .hamburger-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .hamburger-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: min(84vw, 320px);
+        background: #020617;
+        border-right: 1px solid #111827;
+        transform: translateX(-101%);
+        transition: transform 150ms ease;
+        z-index: 20;
+        padding: 1rem;
+        box-sizing: border-box;
+      }
+
+      .hamburger-menu.open {
+        transform: translateX(0);
+      }
+
+      .hamburger-menu h2 {
+        margin: 0 0 0.65rem;
+        font-size: 0.95rem;
+      }
+
+      .menu-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.45rem;
+      }
+
+      .menu-link {
+        display: block;
+        width: 100%;
+        text-align: left;
+        border: 1px solid #1f2937;
+        border-radius: 0.6rem;
+        background: #020617;
+        color: #e5e7eb;
+        padding: 0.55rem 0.65rem;
+        cursor: pointer;
+        font-size: 0.86rem;
+      }
+
+      .menu-link.active {
+        border-color: #4f46e5;
+        background: rgba(79, 70, 229, 0.2);
+      }
+
+      .app-page {
+        margin-top: 1.25rem;
+      }
+
+      .app-page[hidden] {
+        display: none !important;
+      }
+
       h1 {
         margin-bottom: 0.25rem;
         display: flex;
@@ -311,102 +405,149 @@
         padding: 0.28rem 0.65rem;
       }
     </style>
-    <script type="module" crossorigin src="./index-D9X87df5.js"></script>
+    <script type="module" crossorigin src="./index-B9Equwir.js"></script>
   </head>
   <body>
     <div id="app">
       <header>
-        <h1>Article Publisher <span class="app-version">v1.0.175</span></h1>
+        <div class="topbar">
+          <h1>Article Publisher <span class="app-version">v1.0.180</span></h1>
+          <button id="hamburger-open" type="button" class="hamburger-btn" aria-label="Open navigation menu">☰</button>
+        </div>
         <p class="muted">
           Connect your G2 glasses, configure Gemini + search grounding, ElevenLabs,OpenAI and WordPress, then drive the whole publishing flow from the
           glasses.
         </p>
       </header>
 
-      <section class="card" id="phone-audio-start-banner">
-        <h2>Read aloud on this phone</h2>
-        <p class="muted" style="margin: 0 0 0.75rem">
-          <strong>Read aloud</strong> from the glasses plays on this device. On iPhone and many Android WebViews you must
-          unlock audio with a tap here first (same action as in <strong>Phone audio</strong> below).
-        </p>
-        <div class="btn-row">
-          <button type="button" id="audio-unlock-test-start" class="btn btn-primary">
-            Unlock &amp; test phone speaker
-          </button>
-          <button type="button" id="phone-audio-start-banner-dismiss" class="btn btn-ghost">
-            I won&apos;t use phone audio
-          </button>
+      <div id="hamburger-overlay" class="hamburger-overlay" hidden></div>
+      <aside id="hamburger-menu" class="hamburger-menu" hidden>
+        <h2>Menu</h2>
+        <ul class="menu-list">
+          <li><button type="button" class="menu-link active" data-page-target="page-dashboard">Dashboard</button></li>
+          <li><button type="button" class="menu-link" data-page-target="page-work-status">Work status</button></li>
+          <li><button type="button" class="menu-link" data-page-target="page-help-log">Help &amp; log</button></li>
+          <li><button type="button" class="menu-link" data-page-target="page-settings">Settings</button></li>
+        </ul>
+      </aside>
+
+      <section id="page-dashboard" class="app-page">
+        <section class="card" id="phone-audio-start-banner">
+          <h2>Read aloud on this phone</h2>
+          <p class="muted" style="margin: 0 0 0.75rem">
+            <strong>Read aloud</strong> from the glasses plays on this device. On iPhone and many Android WebViews you must
+            unlock audio with a tap here first (same action as in <strong>Phone audio</strong> below).
+          </p>
+          <div class="btn-row">
+            <button type="button" id="audio-unlock-test-start" class="btn btn-primary">
+              Unlock &amp; test phone speaker
+            </button>
+            <button type="button" id="phone-audio-start-banner-dismiss" class="btn btn-ghost">
+              I won&apos;t use phone audio
+            </button>
+          </div>
+        </section>
+
+        <div class="grid">
+          <pre id="status">Booting…</pre>
+          <section class="card" id="research-refinement">
+            <h2>Prompt Research refinement</h2>
+            <div id="research-status" class="muted" style="margin-bottom: 0.5rem;">
+              No research selected on glasses.
+            </div>
+            <label for="prompt-text">Prompt to update current research</label>
+            <textarea
+              id="prompt-text"
+              rows="3"
+              disabled
+              placeholder="Example: Make the tone more optimistic and add a short call-to-action at the end."
+            ></textarea>
+            <div class="btn-row">
+              <button id="prompt-submit" class="btn btn-primary" type="button" disabled>
+                Apply prompt to research
+              </button>
+              <button id="use-transcript" class="btn btn-ghost" type="button" disabled>
+                Use last voice transcript
+              </button>
+            </div>
+          </section>
         </div>
       </section>
 
-      <div class="grid">
-        <pre id="status">Booting…</pre>               
+      <section id="page-work-status" class="app-page" hidden>
+        <div class="grid">
+          <section class="card" id="prompt-topics">
+            <h2>Prompt Topics</h2>
+            <p class="muted">Manage the list of topics that will be available when starting new research on the glasses.</p>
+            <label for="new-topic">Add topic</label>
+            <input id="new-topic" type="text" placeholder="e.g. Artificial Intelligence, Quantum computing…" />
+            <ul id="topics-list" class="topic-list"></ul>
+            <div class="btn-row">
+              <button id="topics-add" class="btn btn-primary">Add topic</button>
+              <button id="topics-delete" class="btn btn-ghost">Delete selected</button>
+              <button id="topics-save" class="btn btn-ghost">Save list</button>
+            </div>
+          </section>
 
-        <section class="card" id="research-refinement">
-          <h2>Prompt Research refinement</h2>
+          <section class="card" id="draft-researches-phone">
+            <div class="ai-settings-header-row">
+              <h2>Draft researches</h2>
+              <button type="button" id="research-lists-refresh" class="btn btn-ghost">Refresh</button>
+            </div>
+            <p class="muted">
+              Drafts appear when you start or continue article research on the glasses. Delete removes the draft from shared
+              storage (same data as “Continue Old Article Research”).
+            </p>
+            <ul id="draft-researches-list" class="research-manage-list"></ul>
+            <p id="draft-researches-empty" class="muted" hidden style="margin: 0.35rem 0 0">No drafts.</p>
+          </section>
 
-          <div id="research-status" class="muted" style="margin-bottom: 0.5rem;">
-            No research selected on glasses.
-          </div>
+          <section class="card" id="ready-researches-phone">
+            <h2>Ready for publishing</h2>
+            <p class="muted">
+              Items marked ready on the glasses. Delete removes them from the queue (same list as “Review Ready for
+              Publishing”).
+            </p>
+            <ul id="ready-researches-list" class="research-manage-list"></ul>
+            <p id="ready-researches-empty" class="muted" hidden style="margin: 0.35rem 0 0">Nothing ready yet.</p>
+          </section>
+        </div>
+      </section>
 
-          <label for="prompt-text">Prompt to update current research</label>
-          <textarea
-            id="prompt-text"
-            rows="3"
-            disabled
-            placeholder="Example: Make the tone more optimistic and add a short call-to-action at the end."
-          ></textarea>
+      <section id="page-help-log" class="app-page" hidden>
+        <div class="grid">
+          <section class="card" id="article-publisher">
+            <h2>How to use Article Publisher</h2>
+            <p class="muted">
+              <a href="https://ivan.vlaevski.com/article-publisher/" target="_blank" rel="noopener noreferrer">Article Publisher usage article at Ivan Vlaevski blog</a>
+            </p>
+          </section>
+        </div>
+        <pre id="event-log"></pre>
+      </section>
 
-          <div class="btn-row">
-            <button id="prompt-submit" class="btn btn-primary" type="button" disabled>
-              Apply prompt to research
-            </button>
-            <button id="use-transcript" class="btn btn-ghost" type="button" disabled>
-              Use last voice transcript
-            </button>
-          </div>
-        </section>
+      <section id="page-settings" class="app-page" hidden>
+        <div class="grid">
+          <section class="card" id="g2-connection">
+            <div id="g2-connection-body">
+              <h2>G2 Connection</h2>
+              <p class="muted">Starts the Even Hub bridge and boots the glasses UI.</p>
+              <div class="btn-row">
+                <button id="connectBtn" class="btn btn-primary">
+                  Connect glasses
+                </button>
+              </div>
+              <div style="margin-top: 0.75rem; font-size: 0.75rem; color: #6b7280;">
+                <span class="badge">Tip</span>
+                &nbsp;On the glasses, use tap, double-tap and swipe gestures to navigate menus.
+              </div>
+            </div>
+            <p id="g2-connection-connected" class="muted" hidden style="margin: 0">
+              Bridge connected — use the glasses main menu.
+            </p>
+          </section>
 
-        <section class="card" id="prompt-topics">
-          <h2>Prompt Topics</h2>
-          <p class="muted">Manage the list of topics that will be available when starting new research on the glasses.</p>
-
-          <label for="new-topic">Add topic</label>
-          <input id="new-topic" type="text" placeholder="e.g. Artificial Intelligence, Quantum computing…" />
-
-          <ul id="topics-list" class="topic-list"></ul>
-
-          <div class="btn-row">
-            <button id="topics-add" class="btn btn-primary">Add topic</button>
-            <button id="topics-delete" class="btn btn-ghost">Delete selected</button>
-            <button id="topics-save" class="btn btn-ghost">Save list</button>
-          </div>
-        </section>
-
-        <section class="card" id="draft-researches-phone">
-          <div class="ai-settings-header-row">
-            <h2>Draft researches</h2>
-            <button type="button" id="research-lists-refresh" class="btn btn-ghost">Refresh</button>
-          </div>
-          <p class="muted">
-            Drafts appear when you start or continue article research on the glasses. Delete removes the draft from shared
-            storage (same data as “Continue Old Article Research”).
-          </p>
-          <ul id="draft-researches-list" class="research-manage-list"></ul>
-          <p id="draft-researches-empty" class="muted" hidden style="margin: 0.35rem 0 0">No drafts.</p>
-        </section>
-
-        <section class="card" id="ready-researches-phone">
-          <h2>Ready for publishing</h2>
-          <p class="muted">
-            Items marked ready on the glasses. Delete removes them from the queue (same list as “Review Ready for
-            Publishing”).
-          </p>
-          <ul id="ready-researches-list" class="research-manage-list"></ul>
-          <p id="ready-researches-empty" class="muted" hidden style="margin: 0.35rem 0 0">Nothing ready yet.</p>
-        </section>
-
-        <section class="card" id="ai-settings">
+          <section class="card" id="ai-settings">
           <div id="ai-settings-summary" class="ai-settings-summary" hidden>
             <p class="muted" style="margin: 0">
               AI &amp; publishing settings are filled in. Expand to edit.
@@ -464,77 +605,94 @@
             <button id="save-settings" class="btn btn-primary">Save settings</button>
           </div>
           </div>
-        </section>
+          </section>
 
-        <section class="card" id="g2-connection">
-          <div id="g2-connection-body">
-            <h2>G2 Connection</h2>
-            <p class="muted">Starts the Even Hub bridge and boots the glasses UI.</p>
-            <div class="btn-row">
-              <button id="connectBtn" class="btn btn-primary">
-                Connect glasses
+          <section class="card" id="phone-audio">
+            <h2>Phone audio (read aloud)</h2>
+            <p class="muted">
+              <strong>Read aloud</strong> plays ElevenLabs MP3 on <strong>this phone</strong> (built-in speaker,
+              wired headset, or Bluetooth). Browsers often block sound until you tap this page.
+              <strong>G2 voice refinement</strong> uses the <strong>glasses microphone</strong> (Even bridge), not the
+              phone mic — input list below is for reference and future use.
+            </p>
+            <div class="btn-row" style="margin-top: 0.75rem">
+              <button type="button" id="audio-unlock-test" class="btn btn-primary">
+                Unlock &amp; test phone speaker
               </button>
+              <button type="button" id="audio-refresh-devices" class="btn btn-ghost">Refresh device list</button>
             </div>
-            <div style="margin-top: 0.75rem; font-size: 0.75rem; color: #6b7280;">
-              <span class="badge">Tip</span>
-              &nbsp;On the glasses, use tap, double-tap and swipe gestures to navigate menus.
-            </div>
-          </div>
-          <p id="g2-connection-connected" class="muted" hidden style="margin: 0">
-            Bridge connected — use the glasses main menu.
-          </p>
-        </section> 
+            <p class="muted" style="margin-top: 0.5rem; margin-bottom: 0; font-size: 0.78rem">
+              <strong>Required on iPhone / many Android WebViews:</strong> tap <strong>Unlock &amp; test</strong> once on
+              this phone before using <strong>Read aloud</strong> on the glasses. Browsers only allow
+              <code>audio.play()</code> after a user tap; this page reuses one player so later lines work without
+              tapping again.
+            </p>
 
-        <section class="card" id="phone-audio">
-          <h2>Phone audio (read aloud)</h2>
-          <p class="muted">
-            <strong>Read aloud</strong> plays ElevenLabs MP3 on <strong>this phone</strong> (built-in speaker,
-            wired headset, or Bluetooth). Browsers often block sound until you tap this page.
-            <strong>G2 voice refinement</strong> uses the <strong>glasses microphone</strong> (Even bridge), not the
-            phone mic — input list below is for reference and future use.
-          </p>
-          <div class="btn-row" style="margin-top: 0.75rem">
-            <button type="button" id="audio-unlock-test" class="btn btn-primary">
-              Unlock &amp; test phone speaker
-            </button>
-            <button type="button" id="audio-refresh-devices" class="btn btn-ghost">Refresh device list</button>
-          </div>
-          <p class="muted" style="margin-top: 0.5rem; margin-bottom: 0; font-size: 0.78rem">
-            <strong>Required on iPhone / many Android WebViews:</strong> tap <strong>Unlock &amp; test</strong> once on
-            this phone before using <strong>Read aloud</strong> on the glasses. Browsers only allow
-            <code>audio.play()</code> after a user tap; this page reuses one player so later lines work without
-            tapping again.
-          </p>
+            <label for="audio-output-select">Playback output (speaker / BT)</label>
+            <select id="audio-output-select" aria-describedby="audio-output-hint"></select>
+            <p id="audio-output-hint" class="muted" style="margin-top: 0.35rem; margin-bottom: 0; font-size: 0.75rem">
+              <span id="audio-sink-support-note"></span>
+              When supported (e.g. Chrome on Android), the next read-aloud clip uses this sink.
+              iOS Safari uses the system route only.
+            </p>
 
-          <label for="audio-output-select">Playback output (speaker / BT)</label>
-          <select id="audio-output-select" aria-describedby="audio-output-hint"></select>
-          <p id="audio-output-hint" class="muted" style="margin-top: 0.35rem; margin-bottom: 0; font-size: 0.75rem">
-            <span id="audio-sink-support-note"></span>
-            When supported (e.g. Chrome on Android), the next read-aloud clip uses this sink.
-            iOS Safari uses the system route only.
-          </p>
+            <label for="audio-input-select">Microphones on this device (informational)</label>
+            <select id="audio-input-select" aria-describedby="audio-input-hint"></select>
+            <p id="audio-input-hint" class="muted" style="margin-top: 0.35rem; margin-bottom: 0; font-size: 0.75rem">
+              Not used for STT in this app (G2 PCM → ElevenLabs). Saved for visibility / future features.
+            </p>
 
-          <label for="audio-input-select">Microphones on this device (informational)</label>
-          <select id="audio-input-select" aria-describedby="audio-input-hint"></select>
-          <p id="audio-input-hint" class="muted" style="margin-top: 0.35rem; margin-bottom: 0; font-size: 0.75rem">
-            Not used for STT in this app (G2 PCM → ElevenLabs). Saved for visibility / future features.
-          </p>
-
-          <p class="muted" style="margin-top: 0.75rem; margin-bottom: 0.25rem; font-size: 0.8rem">Detected devices</p>
-          <div id="audio-device-info">Loading…</div>
-        </section>
-
-        <section class="card" id="article-publisher">
-          <h2>How to use Article Publisher</h2>
-          <p class="muted">
-            <a href="https://ivan.vlaevski.com/article-publisher/" target="_blank" rel="noopener noreferrer">Article Publisher usage article at Ivan Vlaevski blog</a>
-          </p>
-        </section>
-      </div>
-      
-      <pre id="event-log"></pre>
+            <p class="muted" style="margin-top: 0.75rem; margin-bottom: 0.25rem; font-size: 0.8rem">Detected devices</p>
+            <div id="audio-device-info">Loading…</div>
+          </section>
+        </div>
+      </section>
     </div>
 
+    <script>
+      const menuButton = document.getElementById('hamburger-open');
+      const menu = document.getElementById('hamburger-menu');
+      const overlay = document.getElementById('hamburger-overlay');
+      const pageSections = Array.from(document.querySelectorAll('.app-page'));
+      const menuLinks = Array.from(document.querySelectorAll('.menu-link'));
+
+      const openMenu = () => {
+        menu?.removeAttribute('hidden');
+        overlay?.removeAttribute('hidden');
+        menu?.classList.add('open');
+        overlay?.classList.add('open');
+      };
+
+      const closeMenu = () => {
+        menu?.classList.remove('open');
+        overlay?.classList.remove('open');
+        window.setTimeout(() => {
+          menu?.setAttribute('hidden', '');
+          overlay?.setAttribute('hidden', '');
+        }, 150);
+      };
+
+      const showPage = (pageId) => {
+        pageSections.forEach((section) => {
+          if (section.id === pageId) section.removeAttribute('hidden');
+          else section.setAttribute('hidden', '');
+        });
+        menuLinks.forEach((link) => {
+          const isActive = link.getAttribute('data-page-target') === pageId;
+          link.classList.toggle('active', isActive);
+        });
+      };
+
+      menuButton?.addEventListener('click', openMenu);
+      overlay?.addEventListener('click', closeMenu);
+      menuLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          const target = link.getAttribute('data-page-target');
+          if (target) showPage(target);
+          closeMenu();
+        });
+      });
+    </script>
   </body>
 </html>
 
