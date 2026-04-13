@@ -458,7 +458,7 @@
       padding: 0.28rem 0.65rem;
     }
   </style>
-  <script type="module" crossorigin src="./index-C80GdbS2.js"></script>
+  <script type="module" crossorigin src="./index-JX4lyZm_.js"></script>
 </head>
 
 <body>
@@ -470,7 +470,7 @@
   <div id="app">
     <header>
       <div class="topbar">
-        <h1>Article Publisher <span class="app-version">v1.0.187</span></h1>
+        <h1>Article Publisher <span class="app-version">v1.0.190</span></h1>
         <button id="hamburger-open" type="button" class="hamburger-btn" aria-label="Open navigation menu">☰</button>
       </div>
     </header>
@@ -746,6 +746,16 @@
       }
     };
 
+    const getCurrentTheme = () => (document.body.classList.contains('theme-light') ? 'light' : 'dark');
+
+    const persistThemeLocal = (theme) => {
+      try {
+        localStorage.setItem(THEME_STORAGE_KEY, theme);
+      } catch {
+        /* ignore storage errors */
+      }
+    };
+
     const loadTheme = () => {
       try {
         const stored = localStorage.getItem(THEME_STORAGE_KEY);
@@ -758,13 +768,10 @@
     menuButton?.addEventListener('click', openMenu);
     overlay?.addEventListener('click', closeMenu);
     themeToggle?.addEventListener('click', () => {
-      const nextTheme = document.body.classList.contains('theme-light') ? 'dark' : 'light';
+      const nextTheme = getCurrentTheme() === 'light' ? 'dark' : 'light';
       applyTheme(nextTheme);
-      try {
-        localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
-      } catch {
-        /* ignore storage errors */
-      }
+      persistThemeLocal(nextTheme);
+      window.dispatchEvent(new CustomEvent('article-publisher:theme-changed', { detail: { theme: nextTheme } }));
     });
     menuLinks.forEach((link) => {
       link.addEventListener('click', () => {
@@ -774,6 +781,12 @@
       });
     });
     loadTheme();
+    window.__articlePublisherSetTheme = (theme) => {
+      const normalized = theme === 'light' ? 'light' : 'dark';
+      applyTheme(normalized);
+      persistThemeLocal(normalized);
+    };
+    window.__articlePublisherGetTheme = () => getCurrentTheme();
   </script>
 </body>
 
